@@ -1,0 +1,13 @@
+{
+	"files.associations": {
+		"stdio.h": "c",
+		"unistd.h": "c",
+		"stdlib.h": "c",
+		"so_long.h": "c",
+		"libft.h": "c",
+		"mlx.h": "c",
+		"string.h": "c",
+		"chrono": "c",
+		"ratio": "c"
+	}
+}
