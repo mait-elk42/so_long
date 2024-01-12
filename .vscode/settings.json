@@ -8,6 +8,7 @@
 		"mlx.h": "c",
 		"string.h": "c",
 		"chrono": "c",
-		"ratio": "c"
+		"ratio": "c",
+		"logger.h": "c"
 	}
 }

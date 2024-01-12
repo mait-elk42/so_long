@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:45:34 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/10 14:36:22 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/11 19:25:35 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	_nsx_valid_block(char c)
 {
 	if (c != 'P' && c != 'E'
 		&& c != '0' && c != '1')
-		_invalid_maps();
+		_nsx_invalid_maps();
 }
 
 int	_nsx_valid_wall(int x, int y, int xlen, int ylen)
@@ -29,13 +29,13 @@ void	_nsx_check_last(char **maps, int *xlen, int *ylen)
 	*xlen = 0;
 	*ylen = 0;
 	if (!maps || !maps[0] || !maps[0][0])
-		_invalid_maps();
+		_nsx_invalid_maps();
 	while (maps[*ylen])
 		(*ylen)++;
 	while (maps[0][*xlen] && maps[0][*xlen] != '\n')
 		(*xlen)++;
 	if (*ylen == *xlen || maps[*ylen - 1][*xlen] == '\n')
-		_invalid_maps();
+		_nsx_invalid_maps();
 }
 
 void	check_maps(char **maps, int *WIN_X, int *WIN_Y)
@@ -56,11 +56,11 @@ void	check_maps(char **maps, int *WIN_X, int *WIN_Y)
 		{
 			_nsx_valid_block(maps[y][x]);
 			if (_nsx_valid_wall(x, y, xlen, ylen) && maps[y][x] != '1')
-				_invalid_maps();
+				_nsx_invalid_maps();
 			x++;
 		}
 		if (x != xlen)
-			_invalid_maps();
+			_nsx_invalid_maps();
 		y++;
 	}
 }
