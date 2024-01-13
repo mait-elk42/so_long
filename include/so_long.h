@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:13:45 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/13 18:56:59 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/13 22:02:35 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ typedef struct s_nsx_player
 	int					Coll_n;
 } t_nsx_player;
 
-
 typedef struct s_mlx
 {
 	void			*mlx_ptr;
@@ -49,6 +48,9 @@ typedef struct s_mlx
 	int				win_y;
 	char			**maps;
 	t_nsx_Gobject	*objects;
+	t_vect2			doorpos;
+	int				door_frames;
+	int				door_max_frames;
 	t_nsx_player	player;
 	int				Coll_Goal;
 }	t_mlx;

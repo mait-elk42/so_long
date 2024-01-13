@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:08:42 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/13 18:58:24 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/13 22:35:22 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,10 @@ void	_nsx_get_player_pos(t_mlx *mlx_info)
 					_initialize_vect(&mlx_info->player.pos, i.x, i.y);
 			if (mlx_info->maps[i.y][i.x] == 'C')
 					mlx_info->Coll_Goal++;
+			if (mlx_info->maps[i.y][i.x] == 'E')
+					_initialize_vect(&mlx_info->doorpos, i.x, i.y);
+			// if (mlx_info->maps[i.y][i.x] == 'E' && mlx_info->Coll_Goal == mlx_info->player.Coll_n)
+			// 		_nsx_exit("YOU WIN ! ", 0, 0);
 			i.x++;
 		}
 		i.y++;
@@ -66,7 +70,7 @@ void	_nsx_get_player_pos(t_mlx *mlx_info)
 
 void	_nsx_start_game(t_mlx	*mlx_data)
 {
-	mlx_data->objects = malloc(sizeof(t_nsx_Gobject) * 12);
+	mlx_data->objects = malloc(sizeof(t_nsx_Gobject) * 13);
 	_nsx_new_gameobject("sprites/tiles/tile00.xpm", &mlx_data->objects[0], mlx_data);
 	_nsx_new_gameobject("sprites/tiles/tile01.xpm", &mlx_data->objects[1], mlx_data);
 	_nsx_new_gameobject("sprites/tiles/tile02.xpm", &mlx_data->objects[2], mlx_data);
@@ -78,12 +82,14 @@ void	_nsx_start_game(t_mlx	*mlx_data)
 	_nsx_new_gameobject("sprites/tiles/tile08.xpm", &mlx_data->objects[8], mlx_data);
 	_nsx_new_gameobject("sprites/tiles/tile09.xpm", &mlx_data->objects[9], mlx_data);
 	_nsx_new_gameobject("sprites/foods/food0.xpm", &mlx_data->objects[10], mlx_data);
-	_nsx_new_gameobject("", &mlx_data->objects[11], mlx_data);
-	_nsx_new_player("sprites/player/idle/plr_idle0.xpm" ,&mlx_data->player, mlx_data);
+	_nsx_new_gameobject("sprites/door/door00.xpm", &mlx_data->objects[11], mlx_data);
+	_nsx_new_player("sprites/player/idle/plr_idle0.xpm", &mlx_data->player, mlx_data);
 	mlx_hook(mlx_data->win_ptr, 17, 0, exitfunc, mlx_data);
 	mlx_hook(mlx_data->win_ptr, 2, 0, key_down, mlx_data);
 	mlx_loop_hook(mlx_data->mlx_ptr, loop, mlx_data);
 	mlx_data->Coll_Goal = 0;
+	mlx_data->door_frames = 0;
+	mlx_data->door_max_frames = 1;
 	_nsx_get_player_pos(mlx_data);
 	_nsx_print_maps(mlx_data);
 	mlx_loop(mlx_data->mlx_ptr);
