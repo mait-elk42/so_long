@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:45:34 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/11 19:25:35 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/13 18:54:09 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	_nsx_valid_block(char c)
 {
-	if (c != 'P' && c != 'E'
-		&& c != '0' && c != '1')
+	if (c != 'P' && c != 'E' && c != '0' && c != '1' && c != 'C')
 		_nsx_invalid_maps();
 }
 
@@ -38,29 +37,28 @@ void	_nsx_check_last(char **maps, int *xlen, int *ylen)
 		_nsx_invalid_maps();
 }
 
-void	check_maps(char **maps, int *WIN_X, int *WIN_Y)
+void	check_maps(t_mlx *mlx_info)
 {
-	int	x;
-	int	y;
-	int	xlen;
-	int	ylen;
+	char	**maps;
+	t_vect2	xy;
+	t_vect2	xy_len;
 
-	y = 0;
-	_nsx_check_last(maps, &xlen, &ylen);
-	*WIN_X = xlen;
-	*WIN_Y = ylen;
-	while (maps[y])
+	_initialize_vect(&xy, 0, 0);
+	maps = mlx_info->maps;
+	_nsx_check_last(maps, &mlx_info->win_x, &mlx_info->win_y);
+	_initialize_vect(&xy_len, mlx_info->win_x, mlx_info->win_y);
+	while (maps[xy.y])
 	{
-		x = 0;
-		while (maps[y][x] && maps[y][x] != '\n')
+		xy.x = 0;
+		while (maps[xy.y][xy.x] && maps[xy.y][xy.x] != '\n')
 		{
-			_nsx_valid_block(maps[y][x]);
-			if (_nsx_valid_wall(x, y, xlen, ylen) && maps[y][x] != '1')
+			_nsx_valid_block(maps[xy.y][xy.x]);
+			if (_nsx_valid_wall(xy.x, xy.y, xy_len.x, xy_len.y) && maps[xy.y][xy.x] != '1')
 				_nsx_invalid_maps();
-			x++;
+			xy.x++;
 		}
-		if (x != xlen)
+		if (xy.x != xy_len.x)
 			_nsx_invalid_maps();
-		y++;
+		xy.y++;
 	}
 }

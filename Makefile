@@ -6,12 +6,12 @@
 #    By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 18:06:00 by mait-elk          #+#    #+#              #
-#    Updated: 2024/01/12 12:17:04 by mait-elk         ###   ########.fr        #
+#    Updated: 2024/01/13 15:56:32 by mait-elk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CFLAGS= -Wall -Wextra -Werror
-UTILS= _errors/map_check1.c _errors/logger.c vectors/vector2.c _errors/args_checker.c game/game.c events/events.c
+UTILS= utils/map_check1.c utils/logger.c utils/vector2.c utils/args_checker.c utils/game.c utils/events.c utils/object.c utils/free_mem.c
 LIBFT=ft
 PWDLIBFT= ./libft_Advanced
 INC= include

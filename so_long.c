@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 22:18:59 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/12 12:31:36 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/13 18:57:12 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	main(int ac, char **av)
 
 	_nsx_check_args(ac, av);
 	get_maps(av[1], &m_data.maps);
-	check_maps(m_data.maps, &m_data.win_x, &m_data.win_y);
+	check_maps(&m_data);
 	m_data.mlx_ptr = mlx_init();
 	if (!m_data.mlx_ptr)
 		_nsx_exit("MLX Can't Init The Connection Fso_long.c L66", -1, 'E');
