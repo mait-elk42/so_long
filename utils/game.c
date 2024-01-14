@@ -6,42 +6,69 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:08:42 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/14 20:26:01 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/14 23:25:55 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-void	_nsx_paint_line(t_mlx *mlx_info, int a, int b, int c, int y)
+// void	_nsx_paint_line(t_mlx *mlx_info, int a, int b, int c, int y)
+// {
+// 	int	x;
+// 	int	max_x;
+
+// 	x = OBJ_SCALE;
+// 	max_x = OBJ_SCALE * mlx_info->win_x;
+// 	mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[a].sprite, 0, y);
+// 	while (x < max_x-OBJ_SCALE)
+// 	{
+// 		mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[b].sprite, x, y);
+// 		x+= OBJ_SCALE;
+// 	}
+// 	mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[c].sprite, x, y);
+// }
+
+void	_nsx_paint_line(t_mlx *mlx_info, char *base_texture, int y)
 {
-	int	x;
-	int	max_x;
+	static int		i;
+	t_nsx_Gobject	img;
+	int				max_x;
+	int				x;
 
 	x = OBJ_SCALE;
 	max_x = OBJ_SCALE * mlx_info->win_x;
-	mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[a].sprite, 0, y);
-	while (x < max_x-OBJ_SCALE)
-	{
-		mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[b].sprite, x, y);
-		x+= OBJ_SCALE;
-	}
-	mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[c].sprite, x, y);
+	base_texture[20] = i+++48;
+	_nsx_new_gameobject(base_texture, &img, mlx_info);
+	mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, img.sprite, 0, y);
+	free(img.sprite);
+	// while (x < max_x-OBJ_SCALE)
+	// {
+	// 	base_texture[]
+	// 	_nsx_new_gameobject(base_texture, &img, mlx_info);
+	// 	mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[b].sprite, x, y);
+	// 	x+= OBJ_SCALE;
+	// }
+	// mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[c].sprite, x, y);
 }
 
 void	_nsx_print_maps(t_mlx *mlx_info)
 {
-	int	y;
-	int	max_y;
+	char	*base_texture;
+	int		y;
+	int		max_y;
 
 	y = OBJ_SCALE;
 	max_y = mlx_info->win_y * OBJ_SCALE;
-	_nsx_paint_line(mlx_info, 0, 1, 2, 0);
-	while (y < max_y - OBJ_SCALE)
-	{
-		_nsx_paint_line(mlx_info, 3, 4, 5, y);
-		y+=OBJ_SCALE;
-	}
-	_nsx_paint_line(mlx_info, 6, 7, 8, y);
+	base_texture = _nsx_p_malloc(26);
+	//FIX THIS 
+	// *base_texture = "textures/tiles/tile00.xpm";
+	_nsx_paint_line(mlx_info, base_texture, 0);
+	// while (y < max_y - OBJ_SCALE)
+	// {
+	// 	_nsx_paint_line(mlx_info, 3, 4, 5, y);
+	// 	y+=OBJ_SCALE;
+	// }
+	// _nsx_paint_line(mlx_info, 6, 7, 8, y);
 }
 
 void	_nsx_get_player_pos(t_mlx *mlx_info)
