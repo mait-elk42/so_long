@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:36:22 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/11 19:10:29 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/14 15:23:45 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	_nsx_invalid_maps(void)
 {
-	ft_printf("INVALID MAPS\n");
+	ft_printf("\033[31mINVALID MAPS\033[0m\n");
 	exit(-1);
 }
 

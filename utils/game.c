@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:08:42 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/13 22:35:22 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/14 20:26:01 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,25 +71,25 @@ void	_nsx_get_player_pos(t_mlx *mlx_info)
 void	_nsx_start_game(t_mlx	*mlx_data)
 {
 	mlx_data->objects = malloc(sizeof(t_nsx_Gobject) * 13);
-	_nsx_new_gameobject("sprites/tiles/tile00.xpm", &mlx_data->objects[0], mlx_data);
-	_nsx_new_gameobject("sprites/tiles/tile01.xpm", &mlx_data->objects[1], mlx_data);
-	_nsx_new_gameobject("sprites/tiles/tile02.xpm", &mlx_data->objects[2], mlx_data);
-	_nsx_new_gameobject("sprites/tiles/tile03.xpm", &mlx_data->objects[3], mlx_data);
-	_nsx_new_gameobject("sprites/tiles/tile04.xpm", &mlx_data->objects[4], mlx_data);
-	_nsx_new_gameobject("sprites/tiles/tile05.xpm", &mlx_data->objects[5], mlx_data);
-	_nsx_new_gameobject("sprites/tiles/tile06.xpm", &mlx_data->objects[6], mlx_data);
-	_nsx_new_gameobject("sprites/tiles/tile07.xpm", &mlx_data->objects[7], mlx_data);
-	_nsx_new_gameobject("sprites/tiles/tile08.xpm", &mlx_data->objects[8], mlx_data);
-	_nsx_new_gameobject("sprites/tiles/tile09.xpm", &mlx_data->objects[9], mlx_data);
-	_nsx_new_gameobject("sprites/foods/food0.xpm", &mlx_data->objects[10], mlx_data);
-	_nsx_new_gameobject("sprites/door/door00.xpm", &mlx_data->objects[11], mlx_data);
-	_nsx_new_player("sprites/player/idle/plr_idle0.xpm", &mlx_data->player, mlx_data);
+	_nsx_new_gameobject("textures/tiles/tile00.xpm", &mlx_data->objects[0], mlx_data);
+	_nsx_new_gameobject("textures/tiles/tile01.xpm", &mlx_data->objects[1], mlx_data);
+	_nsx_new_gameobject("textures/tiles/tile02.xpm", &mlx_data->objects[2], mlx_data);
+	_nsx_new_gameobject("textures/tiles/tile03.xpm", &mlx_data->objects[3], mlx_data);
+	_nsx_new_gameobject("textures/tiles/tile04.xpm", &mlx_data->objects[4], mlx_data);
+	_nsx_new_gameobject("textures/tiles/tile05.xpm", &mlx_data->objects[5], mlx_data);
+	_nsx_new_gameobject("textures/tiles/tile06.xpm", &mlx_data->objects[6], mlx_data);
+	_nsx_new_gameobject("textures/tiles/tile07.xpm", &mlx_data->objects[7], mlx_data);
+	_nsx_new_gameobject("textures/tiles/tile08.xpm", &mlx_data->objects[8], mlx_data);
+	_nsx_new_gameobject("textures/tiles/tile09.xpm", &mlx_data->objects[9], mlx_data);
+	_nsx_new_gameobject("textures/foods/food2.xpm", &mlx_data->objects[10], mlx_data);
+	_nsx_new_gameobject("textures/door/door0.xpm", &mlx_data->objects[11], mlx_data);
+	_nsx_new_gameobject("textures/door/door1.xpm", &mlx_data->objects[12], mlx_data);
+	_nsx_new_player("textures/player/plr_idle.xpm", &mlx_data->player, mlx_data);
 	mlx_hook(mlx_data->win_ptr, 17, 0, exitfunc, mlx_data);
 	mlx_hook(mlx_data->win_ptr, 2, 0, key_down, mlx_data);
 	mlx_loop_hook(mlx_data->mlx_ptr, loop, mlx_data);
 	mlx_data->Coll_Goal = 0;
-	mlx_data->door_frames = 0;
-	mlx_data->door_max_frames = 1;
+	mlx_data->door_locked = 1;
 	_nsx_get_player_pos(mlx_data);
 	_nsx_print_maps(mlx_data);
 	mlx_loop(mlx_data->mlx_ptr);

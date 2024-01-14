@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:15:59 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/13 23:23:26 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/14 17:55:12 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	_painter_api(t_mlx *mlx_info, t_vect2 step, t_vect2 pos)
 		mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[9].sprite, step.x, step.y);
 	if (maps[pos.y][pos.x] == 'C')
 		mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[10].sprite, step.x, step.y);
-	if (maps[pos.y][pos.x] == 'E')
+	if (maps[pos.y][pos.x] == 'E' && mlx_info->door_locked)
 		mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[11].sprite, step.x, step.y);
 	if (maps[pos.y][pos.x] == 'P')
 		mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->player.sprite, step.x, step.y);
@@ -67,14 +67,13 @@ int	loop(t_mlx *mlx_info)
 	_initialize_vect(&pos, 0, 0);
 	_initialize_vect(&max, mlx_info->win_x, mlx_info->win_y);
 	// mlx_clear_window(mlx_info->mlx_ptr, mlx_info->win_ptr);
-	// if (mlx_info->player.Coll_n == mlx_info->Coll_Goal && mlx_info->door_frames < mlx_info->door_max_frames)
-	// 	{
-	// 		_nsx_exit("YOU WIN !", 0, 0);
-	// 		ft_printf("THE DOOR IS OPENED!");
-	// 		mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[4].sprite, mlx_info->doorpos.x * OBJ_SCALE, mlx_info->doorpos.y * OBJ_SCALE);
-	// 		mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[mlx_info->door_frames+11].sprite, mlx_info->doorpos.x* OBJ_SCALE, mlx_info->doorpos.y* OBJ_SCALE);
-	// 		mlx_info->door_frames++;
-	// 	}
+	if (mlx_info->player.Coll_n == mlx_info->Coll_Goal && mlx_info->door_locked)
+		{
+			ft_printf("THE DOOR IS OPENED!");
+			mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[4].sprite, mlx_info->doorpos.x * OBJ_SCALE, mlx_info->doorpos.y * OBJ_SCALE);
+			mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[12].sprite, mlx_info->doorpos.x* OBJ_SCALE, mlx_info->doorpos.y* OBJ_SCALE);
+			mlx_info->door_locked = 0;
+		}
 	while (pos.y < max.y)
 	{
 		pos.x = 0;

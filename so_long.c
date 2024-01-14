@@ -6,51 +6,57 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 22:18:59 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/13 18:57:12 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/14 17:15:37 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	_nsx_get_fileinfo(char *filename, int *len, int *newfd)
+int	_nsx_get_filelines(char *filename)
 {
-	int	i;
-	int	fd;
+	char	*line;
+	int		i;
+	int		fd;
 
 	i = 0;
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		_nsx_exit("CAN'T OPN FL(so_long.c:L136)", -1, 'E');
-	while (get_next_line(fd))
+	fd = _nsx_p_open(filename);
+	line = get_next_line(fd);
+	while (line)
+	{
+		free(line);
+		line = get_next_line(fd);
 		i++;
+	}
 	close(fd);
-	fd = open(filename, O_RDONLY);
-	if (fd == -1)
-		_nsx_exit("CAN'T OPN FL(so_long.c:L142)", -1, 'E');
-	*newfd = fd;
-	*len = i;
+	return (i);
 }
 
-void	get_maps(char *filename, char ***maps)
+char	**get_maps(char *filename)
 {
+	char	**maps;
 	int		fd;
 	int		len;
 	int		i;
 
-	_nsx_get_fileinfo(filename, &len, &fd);
-	*maps = malloc((len * sizeof(char *)) + 1);
-	if (!*maps)
-		_nsx_exit("CAN'T ALLOC Mm(so_long.c, L144)", -1, 'E');
 	i = 0;
+	fd = _nsx_p_open(filename);
+	len = _nsx_get_filelines(filename);
+	maps = _nsx_p_malloc((len + 1) * sizeof(char *));
 	while (i < len)
 	{
-		(*maps)[i] = get_next_line(fd);
-		if (!(*maps)[i])
+		maps[i] = get_next_line(fd);
+		if (!maps[i])
+		{
+			while (i--)
+				free(maps[i]);
+			free(maps);
 			_nsx_invalid_maps();
+		}
 		i++;
 	}
-	(*maps)[i] = 0;
+	maps[i] = 0;
 	close(fd);
+	return (maps);
 }
 
 
@@ -58,8 +64,8 @@ int	main(int ac, char **av)
 {
 	t_mlx	m_data;
 
-	_nsx_check_args(ac, av);
-	get_maps(av[1], &m_data.maps);
+	_nsx_check_extension_args(ac, av);
+	m_data.maps = get_maps(av[1]);
 	check_maps(&m_data);
 	m_data.mlx_ptr = mlx_init();
 	if (!m_data.mlx_ptr)

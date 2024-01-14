@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:13:45 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/13 22:02:35 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/14 17:10:02 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ typedef struct s_mlx
 	char			**maps;
 	t_nsx_Gobject	*objects;
 	t_vect2			doorpos;
-	int				door_frames;
-	int				door_max_frames;
+	int				door_locked;
 	t_nsx_player	player;
 	int				Coll_Goal;
 }	t_mlx;
@@ -62,11 +61,10 @@ void	_move_to(t_mlx	*mlx_info, int x, int y);
 void	check_maps(t_mlx *mlx_info);
 void	_nsx_invalid_maps(void);
 void	_nsx_exit(char *last_msg, int status, char type);
-void	_nsx_check_args(int ac, char **av);
+void	_nsx_check_extension_args(int ac, char **av);
 
 void	_nsx_start_game(t_mlx *mlx_data);
 int		key_down(int keycode, t_mlx *mlx_info);
-int		key_up(int keycode, t_mlx *mlx_info);
 int		exitfunc(t_mlx *mlx_info);
 int		loop(t_mlx *mlx_info);
 void	_painter_api(t_mlx *mlx_info, t_vect2 step, t_vect2 pos);
@@ -76,4 +74,6 @@ void	_nsx_new_gameobject(char *xpmfile, t_nsx_Gobject *gameobject, t_mlx *m_data
 void	_nsx_new_player(char *xpmfile, t_nsx_player *gameobject, t_mlx *m_data);
 
 void	_nsx_free_all(t_mlx *mlx_info);
+int		_nsx_p_open(char *filename);
+void	*_nsx_p_malloc(int size);
 #endif
