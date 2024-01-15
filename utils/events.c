@@ -6,24 +6,36 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:15:59 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/14 23:01:37 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/15 14:29:48 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
+int	_nsx_gettrgb(int t, int r, int g, int b)
+{
+	return (t << 24 | r  << 16 | g << 8 | b);
+}
+
 void	_painter_api(t_mlx *mlx_info, t_vect2 step, t_vect2 pos)
 {
 	// t_vect2	plrpos;
 	char	**maps;
+	char	*base_texture;
 
 	// plrpos = mlx_info->player.pos;
 	maps = mlx_info->maps;
 	if (maps[pos.y][pos.x] == '1' && pos.x != mlx_info->win_x-1 && pos.y != mlx_info->win_y-1 && pos.x != 0 && pos.y != 0)
-		mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[9].sprite, step.x, step.y);
+	{
+		base_texture = _nsx_p_malloc(26);
+		ft_memcpy(base_texture, "textures/stone/stone0.xpm", 25);
+		base_texture[20] = 48+ pos.x % 5;
+		_nsx_paint_sprite(mlx_info, base_texture, step);
+		free(base_texture);
+	}
 	if (maps[pos.y][pos.x] == 'C')
 		mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[10].sprite, step.x, step.y);
-	if (maps[pos.y][pos.x] == 'E' && mlx_info->door_locked)
+	if (maps[pos.y][pos.x] == 'E')
 		mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[11].sprite, step.x, step.y);
 	if (maps[pos.y][pos.x] == 'P')
 		mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->player.sprite, step.x, step.y);
@@ -69,23 +81,27 @@ int	loop(t_mlx *mlx_info)
 	// mlx_clear_window(mlx_info->mlx_ptr, mlx_info->win_ptr);
 	if (mlx_info->player.Coll_n == mlx_info->Coll_Goal && mlx_info->door_locked)
 		{
-			ft_printf("THE DOOR IS OPENED!");
-			mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[4].sprite, mlx_info->doorpos.x * OBJ_SCALE, mlx_info->doorpos.y * OBJ_SCALE);
+			ft_printf("THE DOOR IS OPENED!\n");
+			mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->Floor->sprite, mlx_info->doorpos.x * OBJ_SCALE, mlx_info->doorpos.y * OBJ_SCALE);
 			mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[12].sprite, mlx_info->doorpos.x* OBJ_SCALE, mlx_info->doorpos.y* OBJ_SCALE);
 			mlx_info->door_locked = 0;
 		}
-	while (pos.y < max.y)
+	if (!mlx_info->printed)
 	{
-		pos.x = 0;
-		step.x = 0;
-		while (pos.x < max.x)
+		while (pos.y < max.y)
 		{
-			_painter_api(mlx_info, step, pos);
-			pos.x++;
-			step.x += OBJ_SCALE;
+			pos.x = 0;
+			step.x = 0;
+			while (pos.x < max.x)
+			{
+				_painter_api(mlx_info, step, pos);
+				pos.x++;
+				step.x += OBJ_SCALE;
+			}
+			pos.y++;
+			step.y += OBJ_SCALE;
 		}
-		pos.y++;
-		step.y += OBJ_SCALE;
+		mlx_info->printed = 1;
 	}
 	return (0);
 }

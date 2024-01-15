@@ -6,49 +6,38 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:08:42 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/14 23:25:55 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/15 14:11:32 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-// void	_nsx_paint_line(t_mlx *mlx_info, int a, int b, int c, int y)
-// {
-// 	int	x;
-// 	int	max_x;
-
-// 	x = OBJ_SCALE;
-// 	max_x = OBJ_SCALE * mlx_info->win_x;
-// 	mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[a].sprite, 0, y);
-// 	while (x < max_x-OBJ_SCALE)
-// 	{
-// 		mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[b].sprite, x, y);
-// 		x+= OBJ_SCALE;
-// 	}
-// 	mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[c].sprite, x, y);
-// }
-
-void	_nsx_paint_line(t_mlx *mlx_info, char *base_texture, int y)
+void	_nsx_paint_sprite(t_mlx *mlx_info, char *base_texture, t_vect2 pos)
 {
-	static int		i;
 	t_nsx_Gobject	img;
+
+	_nsx_new_gameobject(base_texture, &img, mlx_info);
+	mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, img.sprite, pos.x, pos.y);
+	free(img.sprite);
+}
+
+void	_nsx_paint_line(t_mlx *mlx_info, char *base_texture, int y, int i)
+{
 	int				max_x;
 	int				x;
 
 	x = OBJ_SCALE;
 	max_x = OBJ_SCALE * mlx_info->win_x;
-	base_texture[20] = i+++48;
-	_nsx_new_gameobject(base_texture, &img, mlx_info);
-	mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, img.sprite, 0, y);
-	free(img.sprite);
-	// while (x < max_x-OBJ_SCALE)
-	// {
-	// 	base_texture[]
-	// 	_nsx_new_gameobject(base_texture, &img, mlx_info);
-	// 	mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[b].sprite, x, y);
-	// 	x+= OBJ_SCALE;
-	// }
-	// mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[c].sprite, x, y);
+	base_texture[20] = i;
+	_nsx_paint_sprite(mlx_info, base_texture, (t_vect2){0, y});
+	base_texture[20]= i+1;
+	while (x < max_x-OBJ_SCALE)
+	{
+		_nsx_paint_sprite(mlx_info, base_texture, (t_vect2){x, y});
+		x+= OBJ_SCALE;
+	}
+	base_texture[20] = i+2;
+	_nsx_paint_sprite(mlx_info, base_texture, (t_vect2){x, y});
 }
 
 void	_nsx_print_maps(t_mlx *mlx_info)
@@ -61,14 +50,15 @@ void	_nsx_print_maps(t_mlx *mlx_info)
 	max_y = mlx_info->win_y * OBJ_SCALE;
 	base_texture = _nsx_p_malloc(26);
 	//FIX THIS 
-	// *base_texture = "textures/tiles/tile00.xpm";
-	_nsx_paint_line(mlx_info, base_texture, 0);
-	// while (y < max_y - OBJ_SCALE)
-	// {
-	// 	_nsx_paint_line(mlx_info, 3, 4, 5, y);
-	// 	y+=OBJ_SCALE;
-	// }
-	// _nsx_paint_line(mlx_info, 6, 7, 8, y);
+	ft_memcpy(base_texture, "textures/tiles/tile00.xpm", 25);
+	_nsx_paint_line(mlx_info, base_texture, 0, '0');
+	while (y < max_y - OBJ_SCALE)
+	{
+		_nsx_paint_line(mlx_info, base_texture, y, '3');
+		y+=OBJ_SCALE;
+	}
+	_nsx_paint_line(mlx_info, base_texture, y, '6');
+	free(base_texture);
 }
 
 void	_nsx_get_player_pos(t_mlx *mlx_info)
@@ -98,16 +88,7 @@ void	_nsx_get_player_pos(t_mlx *mlx_info)
 void	_nsx_start_game(t_mlx	*mlx_data)
 {
 	mlx_data->objects = malloc(sizeof(t_nsx_Gobject) * 13);
-	_nsx_new_gameobject("textures/tiles/tile00.xpm", &mlx_data->objects[0], mlx_data);
-	_nsx_new_gameobject("textures/tiles/tile01.xpm", &mlx_data->objects[1], mlx_data);
-	_nsx_new_gameobject("textures/tiles/tile02.xpm", &mlx_data->objects[2], mlx_data);
-	_nsx_new_gameobject("textures/tiles/tile03.xpm", &mlx_data->objects[3], mlx_data);
-	_nsx_new_gameobject("textures/tiles/tile04.xpm", &mlx_data->objects[4], mlx_data);
-	_nsx_new_gameobject("textures/tiles/tile05.xpm", &mlx_data->objects[5], mlx_data);
-	_nsx_new_gameobject("textures/tiles/tile06.xpm", &mlx_data->objects[6], mlx_data);
-	_nsx_new_gameobject("textures/tiles/tile07.xpm", &mlx_data->objects[7], mlx_data);
-	_nsx_new_gameobject("textures/tiles/tile08.xpm", &mlx_data->objects[8], mlx_data);
-	_nsx_new_gameobject("textures/tiles/tile09.xpm", &mlx_data->objects[9], mlx_data);
+	_nsx_new_gameobject("textures/tiles/tile04.xpm", mlx_data->Floor, mlx_data);
 	_nsx_new_gameobject("textures/foods/food2.xpm", &mlx_data->objects[10], mlx_data);
 	_nsx_new_gameobject("textures/door/door0.xpm", &mlx_data->objects[11], mlx_data);
 	_nsx_new_gameobject("textures/door/door1.xpm", &mlx_data->objects[12], mlx_data);
@@ -117,6 +98,8 @@ void	_nsx_start_game(t_mlx	*mlx_data)
 	mlx_loop_hook(mlx_data->mlx_ptr, loop, mlx_data);
 	mlx_data->Coll_Goal = 0;
 	mlx_data->door_locked = 1;
+	mlx_data->printed = 0;
+	mlx_data->player.steps_count = 0;
 	_nsx_get_player_pos(mlx_data);
 	_nsx_print_maps(mlx_data);
 	mlx_loop(mlx_data->mlx_ptr);
