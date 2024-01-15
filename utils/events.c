@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:15:59 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/15 14:29:48 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/15 21:54:15 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void	_painter_api(t_mlx *mlx_info, t_vect2 step, t_vect2 pos)
 		free(base_texture);
 	}
 	if (maps[pos.y][pos.x] == 'C')
-		mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[10].sprite, step.x, step.y);
+		mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->Collection.sprite, step.x, step.y);
 	if (maps[pos.y][pos.x] == 'E')
-		mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[11].sprite, step.x, step.y);
+		mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->door.door_close.sprite, step.x, step.y);
 	if (maps[pos.y][pos.x] == 'P')
 		mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->player.sprite, step.x, step.y);
 }
@@ -44,11 +44,7 @@ void	_painter_api(t_mlx *mlx_info, t_vect2 step, t_vect2 pos)
 int	key_down(int keycode, t_mlx *mlx_info)
 {
 	if (keycode == 53)
-	{
-		mlx_destroy_window(mlx_info->mlx_ptr, mlx_info->win_ptr);
-		_nsx_free_all(mlx_info);
-		_nsx_exit("GAME OVER", 0, 0);
-	}
+		_nsx_game_closed(mlx_info);
 	if ((keycode == K_W || keycode == K_ARROW_UP))
 		_move_to(mlx_info, mlx_info->player.pos.x, mlx_info->player.pos.y-1);
 	if ((keycode == K_S || keycode == K_ARROW_DOWN))
@@ -63,9 +59,7 @@ int	key_down(int keycode, t_mlx *mlx_info)
 
 int	exitfunc(t_mlx *mlx_info)
 {
-	mlx_destroy_window(mlx_info->mlx_ptr, mlx_info->win_ptr);
-	_nsx_free_all(mlx_info);
-	_nsx_exit("GAME OVER", 0, 0);
+	_nsx_game_closed(mlx_info);
 	return (0);
 }
 
@@ -78,12 +72,11 @@ int	loop(t_mlx *mlx_info)
 	_initialize_vect(&step, 0, 0);
 	_initialize_vect(&pos, 0, 0);
 	_initialize_vect(&max, mlx_info->win_x, mlx_info->win_y);
-	// mlx_clear_window(mlx_info->mlx_ptr, mlx_info->win_ptr);
 	if (mlx_info->player.Coll_n == mlx_info->Coll_Goal && mlx_info->door_locked)
 		{
 			ft_printf("THE DOOR IS OPENED!\n");
-			mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->Floor->sprite, mlx_info->doorpos.x * OBJ_SCALE, mlx_info->doorpos.y * OBJ_SCALE);
-			mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->objects[12].sprite, mlx_info->doorpos.x* OBJ_SCALE, mlx_info->doorpos.y* OBJ_SCALE);
+			mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->Floor.sprite, mlx_info->doorpos.x * OBJ_SCALE, mlx_info->doorpos.y * OBJ_SCALE);
+			mlx_put_image_to_window(mlx_info->mlx_ptr, mlx_info->win_ptr, mlx_info->door.door_open.sprite, mlx_info->doorpos.x* OBJ_SCALE, mlx_info->doorpos.y* OBJ_SCALE);
 			mlx_info->door_locked = 0;
 		}
 	if (!mlx_info->printed)

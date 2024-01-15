@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:13:45 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/15 14:13:21 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/15 22:44:13 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,18 +38,29 @@ typedef struct s_nsx_player
 	void				*sprite;
 	t_vect2				pos;
 	int					Coll_n;
-	int					steps_count;
+	unsigned long		steps_count;
 } t_nsx_player;
+
+typedef struct s_nsx_door
+{
+	t_nsx_Gobject	door_close;
+	t_nsx_Gobject	door_open;
+	t_vect2			doorpos;
+	int				door_locked;
+} t_nsx_door;
 
 typedef struct s_mlx
 {
 	void			*mlx_ptr;
 	void			*win_ptr;
+	char			**maps;
+	t_nsx_Gobject	*world;
+	t_nsx_door		door;
 	int				win_x;
 	int				win_y;
-	char			**maps;
-	t_nsx_Gobject	*objects;
-	t_nsx_Gobject	*Floor;
+	t_nsx_Gobject	Collection;
+	t_nsx_Gobject	Score_Board;
+	t_nsx_Gobject	Floor;
 	t_vect2			doorpos;
 	int				door_locked;
 	t_nsx_player	player;
@@ -82,5 +93,7 @@ int		_nsx_p_open(char *filename);
 void	*_nsx_p_malloc(int size);
 
 void	_nsx_paint_sprite(t_mlx *mlx_info, char *base_texture, t_vect2 pos);
-int	_nsx_gettrgb(int t, int r, int g, int b);
+int		_nsx_gettrgb(int t, int r, int g, int b);
+void	_nsx_game_closed(t_mlx *mlx_info);
+void	_nsx_Log(char *msg, char *about);
 #endif

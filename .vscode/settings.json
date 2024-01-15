@@ -9,6 +9,7 @@
 		"string.h": "c",
 		"chrono": "c",
 		"ratio": "c",
-		"logger.h": "c"
+		"logger.h": "c",
+		"signal.h": "c"
 	}
 }
