@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 22:18:59 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/15 19:00:20 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:33:32 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,18 @@ char	**get_maps(char *filename)
 
 int	main(int ac, char **av)
 {
-	t_mlx	m_data;
+	t_mlx	mlx_info;
 
 	_nsx_check_extension_args(ac, av);
-	m_data.maps = get_maps(av[1]);
-	check_maps(&m_data);
-	m_data.mlx_ptr = mlx_init();
-	if (!m_data.mlx_ptr)
+	mlx_info.maps = get_maps(av[1]);
+	check_maps(&mlx_info);
+	mlx_info.mlx_ptr = mlx_init();
+	if (!mlx_info.mlx_ptr)
 		_nsx_exit("MLX Can't Init The Connection Fso_long.c L66", -1, 'E');
-	m_data.win_ptr = mlx_new_window(m_data.mlx_ptr, m_data.win_x * OBJ_SCALE, m_data.win_y * OBJ_SCALE, "GAME");
-	if (!m_data.mlx_ptr)
+	mlx_info.win_ptr = mlx_new_window(mlx_info.mlx_ptr, mlx_info.win_x * OBJ_SCALE, mlx_info.win_y * OBJ_SCALE, "GAME");
+	if (!mlx_info.mlx_ptr)
 		_nsx_exit("MLX Can't Init The Window Fso_long.c L69", -1, 'E');
-	_nsx_start_game(&m_data);
+	mlx_info.doorpos.x = 0;
+	_nsx_start_game(&mlx_info);
 	return (0);
 }

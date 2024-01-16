@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:13:45 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/15 22:44:13 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/16 18:33:03 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,37 +35,39 @@ typedef struct s_vect2
 
 typedef struct s_nsx_player
 {
-	void				*sprite;
-	t_vect2				pos;
-	int					Coll_n;
-	unsigned long		steps_count;
+	t_nsx_Gobject		object;
+
 } t_nsx_player;
 
-typedef struct s_nsx_door
+typedef struct s_nsx_color
 {
-	t_nsx_Gobject	door_close;
-	t_nsx_Gobject	door_open;
-	t_vect2			doorpos;
-	int				door_locked;
-} t_nsx_door;
+	unsigned char	t;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+} t_nsx_color;
 
 typedef struct s_mlx
 {
-	void			*mlx_ptr;
-	void			*win_ptr;
-	char			**maps;
+	unsigned long	P_steps_count;
 	t_nsx_Gobject	*world;
-	t_nsx_door		door;
-	int				win_x;
-	int				win_y;
+	t_nsx_Gobject	door_close;
+	t_nsx_Gobject	door_open;
+	t_nsx_Gobject	player;
 	t_nsx_Gobject	Collection;
 	t_nsx_Gobject	Score_Board;
 	t_nsx_Gobject	Floor;
+	t_nsx_Gobject	Box;
 	t_vect2			doorpos;
+	t_vect2			P_pos;
+	void			*mlx_ptr;
+	void			*win_ptr;
+	char			**maps;
+	int				win_x;
+	int				win_y;
 	int				door_locked;
-	t_nsx_player	player;
 	int				Coll_Goal;
-	int				printed;
+	int				P_Coll_n;
 }	t_mlx;
 
 void	_initialize_vect(t_vect2 *vect2, int x, int y);
@@ -96,4 +98,6 @@ void	_nsx_paint_sprite(t_mlx *mlx_info, char *base_texture, t_vect2 pos);
 int		_nsx_gettrgb(int t, int r, int g, int b);
 void	_nsx_game_closed(t_mlx *mlx_info);
 void	_nsx_Log(char *msg, char *about);
+void	_nsx_draw_image(t_mlx *mlx_info, t_vect2 pos, t_nsx_Gobject texture);
+void	_nsx_draw_str(t_mlx *mlx_info, t_vect2 pos, char *s);
 #endif
