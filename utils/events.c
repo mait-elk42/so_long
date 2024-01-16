@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:15:59 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/16 17:57:43 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/16 23:00:33 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int	key_down(int keycode, t_mlx *mlx_info)
 	if (keycode == 53)
 		_nsx_game_closed(mlx_info);
 	if ((keycode == K_W || keycode == K_ARROW_UP))
-		_move_to(mlx_info, mlx_info->P_pos.x, mlx_info->P_pos.y-1);
+		_move_to(mlx_info, mlx_info->player.pos.x, mlx_info->player.pos.y-1);
 	if ((keycode == K_S || keycode == K_ARROW_DOWN))
-		_move_to(mlx_info, mlx_info->P_pos.x, mlx_info->P_pos.y+1);
+		_move_to(mlx_info, mlx_info->player.pos.x, mlx_info->player.pos.y+1);
 	if ((keycode == K_A || keycode == K_ARROW_LEFT))
-		_move_to(mlx_info, mlx_info->P_pos.x-1, mlx_info->P_pos.y);
+		_move_to(mlx_info, mlx_info->player.pos.x-1, mlx_info->player.pos.y);
 	if ((keycode == K_D || keycode == K_ARROW_RIGHT))
-		_move_to(mlx_info, mlx_info->P_pos.x+1, mlx_info->P_pos.y);
+		_move_to(mlx_info, mlx_info->player.pos.x+1, mlx_info->player.pos.y);
 	// ft_printf("%d\n", keycode);
 	return (0);
 }
@@ -41,20 +41,50 @@ int	exitfunc(t_mlx *mlx_info)
 
 int	loop(t_mlx *mlx_info)
 {
-	// t_vect2	step;
-	// t_vect2	pos;
-	// t_vect2	max;
+	static t_vect2	i;
+	static int	init;
+	static int	n;
 
-	(void)mlx_info;
-	// _initialize_vect(&step, 0, 0);
-	// _initialize_vect(&pos, 0, 0);
-	// _initialize_vect(&max, mlx_info->win_x, mlx_info->win_y);
-	// if (mlx_info->P_Coll_n == mlx_info->Coll_Goal && mlx_info->door_locked)
-	// 	{
-	// 		ft_printf("THE DOOR IS OPENED!!!\n");
-	// 		_nsx_draw_image(mlx_info, mlx_info->doorpos, mlx_info->Floor);
-	// 		_nsx_draw_image(mlx_info, (t_vect2){mlx_info->doorpos.x + OBJ_SCALE, mlx_info->doorpos.y + OBJ_SCALE}, mlx_info->door.door_open);
-	// 		mlx_info->door_locked = 0;
-	// 	}
+	if (mlx_info->Enemies_count)
+	{
+		if (!init)
+		{
+			_initialize_vect(&i, mlx_info->Enemy.pos.x, mlx_info->Enemy.pos.y);
+			init = 1;
+		}
+		if (n < 5000)
+		{
+			ft_printf("{%d}\n", i.x);
+			n++;
+		}
+		else
+		{
+			n = 0;
+			if (mlx_info->player.pos.x < i.x && mlx_info->maps[i.y][i.x-1] != '1')
+				i.x--;
+			else
+			if (mlx_info->player.pos.x > i.x && mlx_info->maps[i.y][i.x+1] != '1')
+				i.x++;
+			if (mlx_info->player.pos.y < i.y && mlx_info->maps[i.y-1][i.x] != '1')
+				i.y--;
+			else
+			if (mlx_info->player.pos.y > i.y && mlx_info->maps[i.y+1][i.x] != '1')
+				i.y++;
+			if (ft_strchr("1EC", mlx_info->maps[mlx_info->Enemy.pos.y][mlx_info->Enemy.pos.x]))
+				_nsx_draw_image(mlx_info, mlx_info->Enemy.pos, mlx_info->Floor);
+			if (mlx_info->maps[mlx_info->Enemy.pos.y][mlx_info->Enemy.pos.x] == '1')
+				_nsx_draw_image(mlx_info, mlx_info->Enemy.pos, mlx_info->Box);
+			else
+			if (mlx_info->maps[mlx_info->Enemy.pos.y][mlx_info->Enemy.pos.x] == 'E')
+				_nsx_draw_image(mlx_info, mlx_info->Enemy.pos, mlx_info->door_close);
+			else
+			if (mlx_info->maps[mlx_info->Enemy.pos.y][mlx_info->Enemy.pos.x] == 'C')
+				_nsx_draw_image(mlx_info, mlx_info->Enemy.pos, mlx_info->Collection);
+			else
+				_nsx_draw_image(mlx_info, mlx_info->Enemy.pos, mlx_info->Floor);
+			_nsx_draw_image(mlx_info, i, mlx_info->Enemy);
+			mlx_info->Enemy.pos = i;
+		}
+	}
 	return (0);
 }

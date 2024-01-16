@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 02:41:56 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/16 16:41:00 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/16 22:44:03 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,6 @@ void	_nsx_new_gameobject(char *xpmfile, t_nsx_Gobject *gameobject, t_mlx *m_data
 	gameobject->sprite = mlx_xpm_file_to_image(m_data->mlx_ptr, xpmfile, &gameobject->sp_xsize, &gameobject->sp_ysize);
 	if (!gameobject->sprite)
 		_nsx_invalid_xpmfile(xpmfile);
+	gameobject->pos = (t_vect2){0, 0};
 	_nsx_Log("SUCCESS", xpmfile);
 }

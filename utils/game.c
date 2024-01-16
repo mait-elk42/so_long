@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:08:42 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/16 18:33:47 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/16 22:53:09 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	_nsx_border(t_mlx *mlx_info, t_vect2 i, t_vect2 j)
 
 void	_nsx_miniapi(t_vect2 i, t_mlx *mlx_info, char c)
 {
-	if (ft_strchr("0ECP", c))
+	if (ft_strchr("0ECPe", c))
 		_nsx_draw_image(mlx_info, i, mlx_info->Floor);
 	if (c == 'C')
 	{
@@ -51,14 +51,21 @@ void	_nsx_miniapi(t_vect2 i, t_mlx *mlx_info, char c)
 	}
 	if (c == 'P')
 	{
-		_initialize_vect(&mlx_info->P_pos, i.x, i.y);
+		_initialize_vect(&mlx_info->player.pos, i.x, i.y);
 		_nsx_draw_image(mlx_info, i, mlx_info->player);
 	}
 	if (c == 'E')
 	{
 		
 		_initialize_vect(&mlx_info->doorpos, i.x, i.y);
-		_nsx_draw_image(mlx_info, mlx_info->doorpos, mlx_info->door_close);
+		_nsx_draw_image(mlx_info, i, mlx_info->door_close);
+	}
+	if (c == 'e')
+	{
+		_initialize_vect(&mlx_info->Enemy.pos, i.x, i.y);
+		_nsx_draw_image(mlx_info, i, mlx_info->Enemy);
+		mlx_info->Enemy.pos = i;
+		mlx_info->Enemies_count++;
 	}
 }
 
@@ -85,12 +92,13 @@ void	_nsx_init_maps(t_mlx *mlx_info)
 		}
 		i.y++;
 	}
+	_nsx_show_score(mlx_info);
 }
 
 void	_nsx_init_textures(t_mlx *mlx_info)
 {
 	mlx_info->world = _nsx_p_malloc(sizeof(t_nsx_Gobject) * 8);
-	_nsx_new_gameobject("textures/player/plr_idle.xpm", &mlx_info->player, mlx_info);
+	_nsx_new_gameobject("textures/player.xpm", &mlx_info->player, mlx_info);
 	_nsx_new_gameobject("textures/tiles/tile00.xpm", &mlx_info->world[0], mlx_info);
 	_nsx_new_gameobject("textures/tiles/tile01.xpm", &mlx_info->world[1], mlx_info);
 	_nsx_new_gameobject("textures/tiles/tile02.xpm", &mlx_info->world[2], mlx_info);
@@ -106,6 +114,7 @@ void	_nsx_init_textures(t_mlx *mlx_info)
 	_nsx_new_gameobject("textures/door/door_open.xpm", &mlx_info->door_open, mlx_info);
 	_nsx_new_gameobject("textures/door/door_close.xpm", &mlx_info->door_close, mlx_info);
 	_nsx_new_gameobject("textures/box.xpm", &mlx_info->Box, mlx_info);
+	_nsx_new_gameobject("textures/enemy.xpm", &mlx_info->Enemy, mlx_info);
 }
 
 void	_nsx_start_game(t_mlx	*mlx_data)

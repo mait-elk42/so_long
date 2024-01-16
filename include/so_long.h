@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:13:45 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/16 18:33:03 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/16 22:44:43 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,21 @@
 
 # define OBJ_SCALE 32
 
-typedef struct s_nsx_Gobject
-{
-	void				*sprite;
-	int					sp_xsize;
-	int					sp_ysize;
-}	t_nsx_Gobject;
-
 typedef struct s_vect2
 {
 	int		x;
 	int		y;
 
 }	t_vect2;
+
+typedef struct s_nsx_Gobject
+{
+	void				*sprite;
+	int					sp_xsize;
+	int					sp_ysize;
+	t_vect2				pos;
+}	t_nsx_Gobject;
+
 
 typedef struct s_nsx_player
 {
@@ -57,9 +59,10 @@ typedef struct s_mlx
 	t_nsx_Gobject	Collection;
 	t_nsx_Gobject	Score_Board;
 	t_nsx_Gobject	Floor;
+	t_nsx_Gobject	Enemy;
+	int				Enemies_count;
 	t_nsx_Gobject	Box;
 	t_vect2			doorpos;
-	t_vect2			P_pos;
 	void			*mlx_ptr;
 	void			*win_ptr;
 	char			**maps;
@@ -86,18 +89,16 @@ int		exitfunc(t_mlx *mlx_info);
 int		loop(t_mlx *mlx_info);
 void	_painter_api(t_mlx *mlx_info, t_vect2 step, t_vect2 pos);
 
-void	_nsx_print_walls(t_mlx *mlx_info);
 void	_nsx_new_gameobject(char *xpmfile, t_nsx_Gobject *gameobject, t_mlx *m_data);
-void	_nsx_new_player(char *xpmfile, t_nsx_player *gameobject, t_mlx *m_data);
 
 void	_nsx_free_all(t_mlx *mlx_info);
 int		_nsx_p_open(char *filename);
 void	*_nsx_p_malloc(int size);
 
-void	_nsx_paint_sprite(t_mlx *mlx_info, char *base_texture, t_vect2 pos);
 int		_nsx_gettrgb(int t, int r, int g, int b);
 void	_nsx_game_closed(t_mlx *mlx_info);
 void	_nsx_Log(char *msg, char *about);
 void	_nsx_draw_image(t_mlx *mlx_info, t_vect2 pos, t_nsx_Gobject texture);
 void	_nsx_draw_str(t_mlx *mlx_info, t_vect2 pos, char *s);
+void	_nsx_show_score(t_mlx *mlx_info);
 #endif
