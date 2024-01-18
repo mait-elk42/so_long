@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:08:42 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/16 22:53:09 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/18 06:17:59 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,50 +20,50 @@ void	_nsx_border(t_mlx *mlx_info, t_vect2 i, t_vect2 j)
 	if (maps[i.y][i.x] == '1')
 		{
 			if (i.x == 0 && i.y == 0)
-				_nsx_draw_image(mlx_info, i, mlx_info->world[0]);
+				_nsx_draw_xpm(mlx_info, i, "textures/tiles/tile00.xpm");
 			else if (i.x == j.x - 1 && i.y == 0)
-				_nsx_draw_image(mlx_info, i, mlx_info->world[2]);
+				_nsx_draw_xpm(mlx_info, i, "textures/tiles/tile02.xpm");
 			else if (i.x == 0 && i.y == j.y - 1)
-				_nsx_draw_image(mlx_info, i, mlx_info->world[5]);
+				_nsx_draw_xpm(mlx_info, i, "textures/tiles/tile06.xpm");
 			else if (i.x == j.x - 1 && i.y == j.y - 1)
-				_nsx_draw_image(mlx_info, i, mlx_info->world[7]);
+				_nsx_draw_xpm(mlx_info, i, "textures/tiles/tile08.xpm");
 			else if (i.x > 0 && i.x < j.x - 1 && i.y == 0)
-				_nsx_draw_image(mlx_info, i, mlx_info->world[1]);
+				_nsx_draw_xpm(mlx_info, i, "textures/tiles/tile01.xpm");
 			else if (i.x > 0 && i.x < j.x - 1 && i.y == j.y - 1)
-				_nsx_draw_image(mlx_info, i, mlx_info->world[6]);
+				_nsx_draw_xpm(mlx_info, i, "textures/tiles/tile07.xpm");
 			else if (i.y > 0 && i.y < j.y - 1 && i.x == 0)
-				_nsx_draw_image(mlx_info, i, mlx_info->world[3]);
+				_nsx_draw_xpm(mlx_info, i, "textures/tiles/tile03.xpm");
 			else if (i.y > 0 && i.y < j.y - 1 && i.x == j.x - 1)
-				_nsx_draw_image(mlx_info, i, mlx_info->world[4]);
+				_nsx_draw_xpm(mlx_info, i, "textures/tiles/tile05.xpm");
 			else
-				_nsx_draw_image(mlx_info, i, mlx_info->Box);
+				_nsx_draw_image(mlx_info, i, mlx_info->Box.sprite);
 		}
 }
 
 void	_nsx_miniapi(t_vect2 i, t_mlx *mlx_info, char c)
 {
 	if (ft_strchr("0ECPe", c))
-		_nsx_draw_image(mlx_info, i, mlx_info->Floor);
+		_nsx_draw_image(mlx_info, i, mlx_info->Floor.sprite);
 	if (c == 'C')
 	{
 		mlx_info->Coll_Goal++;
-		_nsx_draw_image(mlx_info, i, mlx_info->Collection);
+		_nsx_draw_image(mlx_info, i, mlx_info->Collection.sprite);
 	}
 	if (c == 'P')
 	{
 		_initialize_vect(&mlx_info->player.pos, i.x, i.y);
-		_nsx_draw_image(mlx_info, i, mlx_info->player);
+		_nsx_draw_image(mlx_info, i, mlx_info->player.sprite);
 	}
 	if (c == 'E')
 	{
 		
 		_initialize_vect(&mlx_info->doorpos, i.x, i.y);
-		_nsx_draw_image(mlx_info, i, mlx_info->door_close);
+		_nsx_draw_image(mlx_info, i, mlx_info->door_close.sprite);
 	}
 	if (c == 'e')
 	{
 		_initialize_vect(&mlx_info->Enemy.pos, i.x, i.y);
-		_nsx_draw_image(mlx_info, i, mlx_info->Enemy);
+		_nsx_draw_image(mlx_info, i, mlx_info->Enemy.sprite);
 		mlx_info->Enemy.pos = i;
 		mlx_info->Enemies_count++;
 	}
@@ -92,37 +92,31 @@ void	_nsx_init_maps(t_mlx *mlx_info)
 		}
 		i.y++;
 	}
-	_nsx_show_score(mlx_info);
+	// _nsx_show_score(mlx_info);
 }
 
 void	_nsx_init_textures(t_mlx *mlx_info)
 {
-	mlx_info->world = _nsx_p_malloc(sizeof(t_nsx_Gobject) * 8);
-	_nsx_new_gameobject("textures/player.xpm", &mlx_info->player, mlx_info);
-	_nsx_new_gameobject("textures/tiles/tile00.xpm", &mlx_info->world[0], mlx_info);
-	_nsx_new_gameobject("textures/tiles/tile01.xpm", &mlx_info->world[1], mlx_info);
-	_nsx_new_gameobject("textures/tiles/tile02.xpm", &mlx_info->world[2], mlx_info);
-	_nsx_new_gameobject("textures/tiles/tile03.xpm", &mlx_info->world[3], mlx_info);
-	_nsx_new_gameobject("textures/tiles/tile05.xpm", &mlx_info->world[4], mlx_info);
-	_nsx_new_gameobject("textures/tiles/tile06.xpm", &mlx_info->world[5], mlx_info);
-	_nsx_new_gameobject("textures/tiles/tile07.xpm", &mlx_info->world[6], mlx_info);
-	_nsx_new_gameobject("textures/tiles/tile08.xpm", &mlx_info->world[7], mlx_info);
-
+	_nsx_new_player(&mlx_info->player, mlx_info);
+	mlx_info->player.sprite = mlx_info->player.sprite_down;
 	_nsx_new_gameobject("textures/tiles/tile04.xpm", &mlx_info->Floor, mlx_info);
 	_nsx_new_gameobject("textures/tiles/sboard.xpm", &mlx_info->Score_Board, mlx_info);
 	_nsx_new_gameobject("textures/foods/food0.xpm", &mlx_info->Collection, mlx_info);
 	_nsx_new_gameobject("textures/door/door_open.xpm", &mlx_info->door_open, mlx_info);
 	_nsx_new_gameobject("textures/door/door_close.xpm", &mlx_info->door_close, mlx_info);
 	_nsx_new_gameobject("textures/box.xpm", &mlx_info->Box, mlx_info);
-	_nsx_new_gameobject("textures/enemy.xpm", &mlx_info->Enemy, mlx_info);
+	// _nsx_new_gameobject("textures/enemy.xpm", &mlx_info->Enemy, mlx_info);
 }
 
-void	_nsx_start_game(t_mlx	*mlx_data)
+void	_nsx_start_game(t_mlx	*mlx_info)
 {
-	_nsx_init_textures(mlx_data);
-	_nsx_init_maps(mlx_data);
-	mlx_hook(mlx_data->win_ptr, 17, 0, exitfunc, mlx_data);
-	mlx_hook(mlx_data->win_ptr, 2, 0, key_down, mlx_data);
-	mlx_loop_hook(mlx_data->mlx_ptr, loop, mlx_data);
-	mlx_loop(mlx_data->mlx_ptr);
+	int	i;
+
+	i = 0;
+	_nsx_init_textures(mlx_info);
+	_nsx_init_maps(mlx_info);
+	mlx_hook(mlx_info->win_ptr, 17, 0, exitfunc, mlx_info);
+	mlx_hook(mlx_info->win_ptr, 2, 0, key_down, mlx_info);
+	mlx_loop_hook(mlx_info->mlx_ptr, loop, mlx_info);
+	mlx_loop(mlx_info->mlx_ptr);
 }

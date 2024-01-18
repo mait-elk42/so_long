@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 22:18:59 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/16 18:33:32 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/18 06:16:22 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ int	_nsx_get_filelines(char *filename)
 	line = get_next_line(fd);
 	while (line)
 	{
+		i++;
 		free(line);
 		line = get_next_line(fd);
-		i++;
 	}
 	close(fd);
 	return (i);
@@ -74,6 +74,7 @@ int	main(int ac, char **av)
 	if (!mlx_info.mlx_ptr)
 		_nsx_exit("MLX Can't Init The Window Fso_long.c L69", -1, 'E');
 	mlx_info.doorpos.x = 0;
+	ft_printf("x%d y%d\n", mlx_info.win_x, mlx_info.win_y);
 	_nsx_start_game(&mlx_info);
 	return (0);
 }
