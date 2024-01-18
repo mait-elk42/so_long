@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:08:42 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/18 23:10:35 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/18 23:11:42 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,10 +114,10 @@ void	_nsx_start_game(t_mlx	*mlx_info)
 	i = 0;
 	_nsx_init_textures(mlx_info);
 	_nsx_init_maps(mlx_info);
-	ft_printf("%d, %d", mlx_info->player.pos.x, mlx_info->player.pos.y);
-	ft_printf("(%c)\n", mlx_info->maps[mlx_info->player.pos.y][mlx_info->player.pos.x]);
-	//SIGSEV ERR :
-	// _nsx_flood_fill(mlx_info, mlx_info->player.pos.x, mlx_info->player.pos.x);
+	// ft_printf("%d, %d", mlx_info->player.pos.x, mlx_info->player.pos.y);
+	// ft_printf("(%c)\n", mlx_info->maps[mlx_info->player.pos.y][mlx_info->player.pos.x]);
+	//SIGSEV ERR : >> FIXED I THINK ITS ABOUT pos.y , before its pos.x
+	_nsx_flood_fill(mlx_info, mlx_info->player.pos.x, mlx_info->player.pos.y);
 	mlx_hook(mlx_info->win_ptr, 17, 0, exitfunc, mlx_info);
 	mlx_hook(mlx_info->win_ptr, 2, 0, key_down, mlx_info);
 	mlx_loop_hook(mlx_info->mlx_ptr, loop, mlx_info);
