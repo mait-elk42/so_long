@@ -6,42 +6,31 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:15:59 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/18 06:53:47 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/18 22:53:39 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-int	_nsx_gettrgb(int t, int r, int g, int b)
-{
-	return (t << 24 | r  << 16 | g << 8 | b);
-}
-
 int	key_down(int keycode, t_mlx *mlx_info)
 {
+	t_vect2	newpos;
+
 	if (keycode == K_ESC)
 		_nsx_game_closed(mlx_info);
+	newpos = mlx_info->player.pos;
+	newpos.y -= (keycode == K_W || keycode == K_ARROW_UP);
+	newpos.y += (keycode == K_S || keycode == K_ARROW_DOWN);
+	newpos.x -= (keycode == K_A || keycode == K_ARROW_LEFT);
+	newpos.x += (keycode == K_D || keycode == K_ARROW_RIGHT);
 	if ((keycode == K_W || keycode == K_ARROW_UP))
-	{
-		mlx_info->player.sprite = mlx_info->player.sprite_up;
-		_move_to(mlx_info, mlx_info->player.pos.x, mlx_info->player.pos.y-1);
-	}
+		_move_to(mlx_info, newpos, _nsx_xpm(mlx_info, P_up));
 	if ((keycode == K_S || keycode == K_ARROW_DOWN))
-	{
-		mlx_info->player.sprite = mlx_info->player.sprite_down;
-		_move_to(mlx_info, mlx_info->player.pos.x, mlx_info->player.pos.y+1);
-	}
+		_move_to(mlx_info, newpos, _nsx_xpm(mlx_info, P_down));
 	if ((keycode == K_A || keycode == K_ARROW_LEFT))
-	{
-		mlx_info->player.sprite = mlx_info->player.sprite_left;
-		_move_to(mlx_info, mlx_info->player.pos.x-1, mlx_info->player.pos.y);
-	}
+		_move_to(mlx_info, newpos, _nsx_xpm(mlx_info, P_left));
 	if ((keycode == K_D || keycode == K_ARROW_RIGHT))
-	{
-		mlx_info->player.sprite = mlx_info->player.sprite_right;
-		_move_to(mlx_info, mlx_info->player.pos.x+1, mlx_info->player.pos.y);
-	}
-	// ft_printf("%d\n", keycode);
+		_move_to(mlx_info, newpos, _nsx_xpm(mlx_info, P_right));
 	return (0);
 }
 

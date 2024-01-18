@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 22:18:59 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/18 06:16:22 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/18 23:01:30 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,11 @@ int	main(int ac, char **av)
 	check_maps(&mlx_info);
 	mlx_info.mlx_ptr = mlx_init();
 	if (!mlx_info.mlx_ptr)
-		_nsx_exit("MLX Can't Init The Connection Fso_long.c L66", -1, 'E');
+		_nsx_exit("MLX Can't Init The Connection", -1, 'E');
 	mlx_info.win_ptr = mlx_new_window(mlx_info.mlx_ptr, mlx_info.win_x * OBJ_SCALE, mlx_info.win_y * OBJ_SCALE, "GAME");
 	if (!mlx_info.mlx_ptr)
-		_nsx_exit("MLX Can't Init The Window Fso_long.c L69", -1, 'E');
+		_nsx_exit("MLX Can't Create The Window", -1, 'E');
 	mlx_info.doorpos.x = 0;
-	ft_printf("x%d y%d\n", mlx_info.win_x, mlx_info.win_y);
 	_nsx_start_game(&mlx_info);
 	return (0);
 }

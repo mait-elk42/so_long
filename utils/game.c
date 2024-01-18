@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:08:42 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/18 06:17:59 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/18 23:10:35 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,13 +92,12 @@ void	_nsx_init_maps(t_mlx *mlx_info)
 		}
 		i.y++;
 	}
-	// _nsx_show_score(mlx_info);
+	_nsx_show_score(mlx_info);
 }
 
 void	_nsx_init_textures(t_mlx *mlx_info)
 {
-	_nsx_new_player(&mlx_info->player, mlx_info);
-	mlx_info->player.sprite = mlx_info->player.sprite_down;
+	_nsx_new_gameobject("textures/player_down.xpm", &mlx_info->player, mlx_info);
 	_nsx_new_gameobject("textures/tiles/tile04.xpm", &mlx_info->Floor, mlx_info);
 	_nsx_new_gameobject("textures/tiles/sboard.xpm", &mlx_info->Score_Board, mlx_info);
 	_nsx_new_gameobject("textures/foods/food0.xpm", &mlx_info->Collection, mlx_info);
@@ -115,6 +114,10 @@ void	_nsx_start_game(t_mlx	*mlx_info)
 	i = 0;
 	_nsx_init_textures(mlx_info);
 	_nsx_init_maps(mlx_info);
+	ft_printf("%d, %d", mlx_info->player.pos.x, mlx_info->player.pos.y);
+	ft_printf("(%c)\n", mlx_info->maps[mlx_info->player.pos.y][mlx_info->player.pos.x]);
+	//SIGSEV ERR :
+	// _nsx_flood_fill(mlx_info, mlx_info->player.pos.x, mlx_info->player.pos.x);
 	mlx_hook(mlx_info->win_ptr, 17, 0, exitfunc, mlx_info);
 	mlx_hook(mlx_info->win_ptr, 2, 0, key_down, mlx_info);
 	mlx_loop_hook(mlx_info->mlx_ptr, loop, mlx_info);

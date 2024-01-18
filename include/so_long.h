@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:13:45 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/18 05:12:41 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/18 23:04:42 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@
 # include <mlx.h>
 
 # define OBJ_SCALE 32
+
+# define P_up "textures/player_up.xpm"
+# define P_down "textures/player_down.xpm"
+# define P_left "textures/player_left.xpm"
+# define P_right "textures/player_right.xpm"
 
 typedef enum	_nsx_direction
 {
@@ -43,33 +48,13 @@ typedef struct s_nsx_Gobject
 	t_vect2				pos;
 }	t_nsx_Gobject;
 
-typedef struct t_nsx_Gplayer
-{
-	void				*sprite;
-	void				*sprite_up;
-	void				*sprite_down;
-	void				*sprite_left;
-	void				*sprite_right;
-	int					sp_xsize;
-	int					sp_ysize;
-	t_vect2				pos;
-} t_nsx_Gplayer;
-
-typedef struct s_nsx_color
-{
-	unsigned char	t;
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-} t_nsx_color;
-
 typedef struct s_mlx
 {
 	unsigned long	P_steps_count;
 	t_nsx_Gobject	*world;
 	t_nsx_Gobject	door_close;
 	t_nsx_Gobject	door_open;
-	t_nsx_Gplayer	player;
+	t_nsx_Gobject	player;
 	t_nsx_Gobject	Collection;
 	t_nsx_Gobject	Score_Board;
 	t_nsx_Gobject	Floor;
@@ -88,8 +73,7 @@ typedef struct s_mlx
 }	t_mlx;
 
 void	_initialize_vect(t_vect2 *vect2, int x, int y);
-void	_move_to(t_mlx	*mlx_info, int x, int y);
-
+void	_move_to(t_mlx	*mlx_info, t_vect2 newpos, void *ptexture);
 
 void	check_maps(t_mlx *mlx_info);
 void	_nsx_invalid_maps(void);
@@ -117,5 +101,9 @@ void	_nsx_draw_str(t_mlx *mlx_info, t_vect2 pos, char *s);
 void	_nsx_show_score(t_mlx *mlx_info);
 
 void	_nsx_draw_xpm(t_mlx *mlx_info, t_vect2 pos, char *xpmfile);
-void	_nsx_new_player(t_nsx_Gplayer *gameobject, t_mlx *m_data);
+void	_nsx_new_player(t_nsx_Gobject *gameobject, t_mlx *m_data);
+void	*_nsx_xpm(t_mlx *mlx_info, char *xpmfile);
+void	_nsx_player_moveup(t_mlx *mlx_info);
+
+int	_nsx_flood_fill(t_mlx *mlx_info, int x, int y);
 #endif

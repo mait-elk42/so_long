@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 15:17:05 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/15 11:36:43 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/18 19:48:34 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,15 @@ int	_nsx_p_open(char *filename)
 	if (fd == -1)
 		_nsx_exit("CAN'T OPN FL(so_long.c:L23)", -1, 'E');
 	return (fd);
+}
+
+void	*_nsx_xpm(t_mlx *mlx_info, char *xpmfile)
+{
+	void	*texture;
+	t_vect2	size;
+
+	texture = mlx_xpm_file_to_image(mlx_info->mlx_ptr, xpmfile, &size.x, &size.y);
+	if (!texture)
+		_nsx_invalid_xpmfile(xpmfile);
+	return (texture);
 }
