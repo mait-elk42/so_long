@@ -6,21 +6,29 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:54:57 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/18 23:12:20 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/19 23:44:11 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/so_long.h"
 
-int	_nsx_flood_fill(t_mlx *mlx_info, int x, int y)
+int	_nsx_flood_fill(char **maps, int x, int y, t_ff_check *res)
 {
-	if (x < 0 || y < 0 || mlx_info->maps[y][x] == '1')
+	// ft_printf("%c , %d %d > %d\n", maps[y][x], x, y, ctarg);
+	if (x < 0 || y < 0 || maps[y][x] == '1' ||
+		maps[y][x] == 'F')
 		return (0);
-	ft_printf("%c\n", mlx_info->maps[y][x]);
-	// mlx_info->maps[y][x] = 'F';
-	_nsx_flood_fill(mlx_info, x - 1, y);
-	// _nsx_flood_fill(mlx_info, x + 1, y);
-	// _nsx_flood_fill(mlx_info, x, y - 1);
-	// _nsx_flood_fill(mlx_info, x, y + 1);
+	if (maps[y][x] == 'E')
+	{
+		res->e = 1;
+		return (0);
+	}
+	if (maps[y][x] == 'C')
+		res->c++;
+	maps[y][x] = 'F';
+	_nsx_flood_fill(maps, x - 1, y, res);
+	_nsx_flood_fill(maps, x, y - 1, res);
+	_nsx_flood_fill(maps, x + 1, y, res);
+	_nsx_flood_fill(maps, x, y + 1, res);
 	return (0);
 }

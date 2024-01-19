@@ -6,15 +6,15 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/09 22:36:22 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/15 19:43:26 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/19 17:02:21 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	_nsx_invalid_maps(void)
+void	_nsx_invalid_maps(char *cause)
 {
-	ft_printf("\033[31mError\n[ Invalid Maps!! ]\033[0m\n");
+	ft_printf("\033[31mError\n[ Invalid Maps!! (%s) ]\033[0m\n", cause);
 	exit(-1);
 }
 

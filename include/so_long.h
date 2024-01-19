@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:13:45 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/18 23:04:42 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/19 23:37:42 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,15 @@ typedef enum	_nsx_direction
 	RIGHT
 } _nsx_direction;
 
+typedef struct s_ff_check
+{
+	int	c;
+	int	cgoal;
+	int	e;
+	int	x;
+	int	y;
+}	t_ff_check;
+
 typedef struct s_vect2
 {
 	int		x;
@@ -51,7 +60,6 @@ typedef struct s_nsx_Gobject
 typedef struct s_mlx
 {
 	unsigned long	P_steps_count;
-	t_nsx_Gobject	*world;
 	t_nsx_Gobject	door_close;
 	t_nsx_Gobject	door_open;
 	t_nsx_Gobject	player;
@@ -65,8 +73,9 @@ typedef struct s_mlx
 	void			*mlx_ptr;
 	void			*win_ptr;
 	char			**maps;
-	int				win_x;
-	int				win_y;
+	t_vect2			window_size;
+	// int				win_x;
+	// int				win_y;
 	int				door_locked;
 	int				Coll_Goal;
 	int				P_Coll_n;
@@ -76,7 +85,7 @@ void	_initialize_vect(t_vect2 *vect2, int x, int y);
 void	_move_to(t_mlx	*mlx_info, t_vect2 newpos, void *ptexture);
 
 void	check_maps(t_mlx *mlx_info);
-void	_nsx_invalid_maps(void);
+void	_nsx_invalid_maps(char *cause);
 void	_nsx_invalid_xpmfile(char *fname);
 void	_nsx_exit(char *last_msg, int status, char type);
 void	_nsx_check_extension_args(int ac, char **av);
@@ -90,6 +99,7 @@ void	_painter_api(t_mlx *mlx_info, t_vect2 step, t_vect2 pos);
 void	_nsx_new_gameobject(char *xpmfile, t_nsx_Gobject *gameobject, t_mlx *m_data);
 
 void	_nsx_free_all(t_mlx *mlx_info);
+void	_nsx_free_2d(char	**arr2d);
 int		_nsx_p_open(char *filename);
 void	*_nsx_p_malloc(int size);
 
@@ -105,5 +115,5 @@ void	_nsx_new_player(t_nsx_Gobject *gameobject, t_mlx *m_data);
 void	*_nsx_xpm(t_mlx *mlx_info, char *xpmfile);
 void	_nsx_player_moveup(t_mlx *mlx_info);
 
-int	_nsx_flood_fill(t_mlx *mlx_info, int x, int y);
+int	_nsx_flood_fill(char **maps, int x, int y, t_ff_check *res);
 #endif

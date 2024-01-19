@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:08:42 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/18 23:11:42 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/19 22:08:12 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,31 +42,14 @@ void	_nsx_border(t_mlx *mlx_info, t_vect2 i, t_vect2 j)
 
 void	_nsx_miniapi(t_vect2 i, t_mlx *mlx_info, char c)
 {
-	if (ft_strchr("0ECPe", c))
+	if (ft_strchr("0ECP", c))
 		_nsx_draw_image(mlx_info, i, mlx_info->Floor.sprite);
 	if (c == 'C')
-	{
-		mlx_info->Coll_Goal++;
 		_nsx_draw_image(mlx_info, i, mlx_info->Collection.sprite);
-	}
 	if (c == 'P')
-	{
-		_initialize_vect(&mlx_info->player.pos, i.x, i.y);
 		_nsx_draw_image(mlx_info, i, mlx_info->player.sprite);
-	}
 	if (c == 'E')
-	{
-		
-		_initialize_vect(&mlx_info->doorpos, i.x, i.y);
 		_nsx_draw_image(mlx_info, i, mlx_info->door_close.sprite);
-	}
-	if (c == 'e')
-	{
-		_initialize_vect(&mlx_info->Enemy.pos, i.x, i.y);
-		_nsx_draw_image(mlx_info, i, mlx_info->Enemy.sprite);
-		mlx_info->Enemy.pos = i;
-		mlx_info->Enemies_count++;
-	}
 }
 
 void	_nsx_init_maps(t_mlx *mlx_info)
@@ -76,11 +59,8 @@ void	_nsx_init_maps(t_mlx *mlx_info)
 	t_vect2	j;
 
 	maps = mlx_info->maps;
-	mlx_info->door_locked = 1;
-	mlx_info->P_steps_count = 0;
-	mlx_info->Coll_Goal = 0;
 	_initialize_vect(&i, 0, 0);
-	_initialize_vect(&j, mlx_info->win_x, mlx_info->win_y);
+	j = mlx_info->window_size;
 	while (i.y < j.y)
 	{
 		i.x = 0;
@@ -95,29 +75,14 @@ void	_nsx_init_maps(t_mlx *mlx_info)
 	_nsx_show_score(mlx_info);
 }
 
-void	_nsx_init_textures(t_mlx *mlx_info)
-{
-	_nsx_new_gameobject("textures/player_down.xpm", &mlx_info->player, mlx_info);
-	_nsx_new_gameobject("textures/tiles/tile04.xpm", &mlx_info->Floor, mlx_info);
-	_nsx_new_gameobject("textures/tiles/sboard.xpm", &mlx_info->Score_Board, mlx_info);
-	_nsx_new_gameobject("textures/foods/food0.xpm", &mlx_info->Collection, mlx_info);
-	_nsx_new_gameobject("textures/door/door_open.xpm", &mlx_info->door_open, mlx_info);
-	_nsx_new_gameobject("textures/door/door_close.xpm", &mlx_info->door_close, mlx_info);
-	_nsx_new_gameobject("textures/box.xpm", &mlx_info->Box, mlx_info);
-	// _nsx_new_gameobject("textures/enemy.xpm", &mlx_info->Enemy, mlx_info);
-}
-
 void	_nsx_start_game(t_mlx	*mlx_info)
 {
 	int	i;
 
 	i = 0;
-	_nsx_init_textures(mlx_info);
 	_nsx_init_maps(mlx_info);
-	// ft_printf("%d, %d", mlx_info->player.pos.x, mlx_info->player.pos.y);
-	// ft_printf("(%c)\n", mlx_info->maps[mlx_info->player.pos.y][mlx_info->player.pos.x]);
 	//SIGSEV ERR : >> FIXED I THINK ITS ABOUT pos.y , before its pos.x
-	_nsx_flood_fill(mlx_info, mlx_info->player.pos.x, mlx_info->player.pos.y);
+	// _nsx_flood_fill(mlx_info, mlx_info->player.pos.x, mlx_info->player.pos.y);
 	mlx_hook(mlx_info->win_ptr, 17, 0, exitfunc, mlx_info);
 	mlx_hook(mlx_info->win_ptr, 2, 0, key_down, mlx_info);
 	mlx_loop_hook(mlx_info->mlx_ptr, loop, mlx_info);

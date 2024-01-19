@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:08:09 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/14 15:23:56 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/19 16:33:48 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void	_nsx_check_extension_args(int ac, char **av)
 	}
 	if (!(*filename == '.' && *(filename+1) == 'b' && *(filename+2) == 'e'
 		&& *(filename+3) == 'r' && *(filename+4) == '\0'))
-		_nsx_invalid_maps();
+		_nsx_invalid_maps("INVALID EXTENSION");
 }

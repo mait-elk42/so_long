@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 19:22:31 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/18 22:22:51 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/19 21:33:13 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	_move_to(t_mlx	*mlx_info, t_vect2 newpos, void	*ptexture)
 		mlx_info->maps[mlx_info->player.pos.y][mlx_info->player.pos.x] = '0';
 		mlx_info->maps[newpos.y][newpos.x] = 'P';
 		_initialize_vect(&mlx_info->player.pos, newpos.x, newpos.y);
-		_nsx_show_score(mlx_info);
 		mlx_info->P_steps_count++;
+		_nsx_show_score(mlx_info);
 		free(ptexture);
 	}
 }
