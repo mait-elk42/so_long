@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 15:17:05 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/18 19:48:34 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/20 19:05:02 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*_nsx_p_malloc(int size)
 	arr = malloc(size);
 	i = 0;
 	if (!arr)
-		_nsx_exit("CAN'T ALLOC", -1, 'E');
+		_nsx_exit("Allocation Failure!", -1, 'E');
 	while (size--)
 		((char *)arr)[size] = '\0';
 	return (arr);
@@ -32,7 +32,7 @@ int	_nsx_p_open(char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd == -1)
-		_nsx_exit("CAN'T OPN FL(so_long.c:L23)", -1, 'E');
+		_nsx_exit("Can't Open File", -1, 'E');
 	return (fd);
 }
 

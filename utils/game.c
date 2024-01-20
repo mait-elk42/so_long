@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:08:42 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/20 12:32:39 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/20 20:19:50 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,20 @@ void	_nsx_border(t_mlx *mlx_info, t_vect2 i, t_vect2 j)
 			else if (i.y > 0 && i.y < j.y - 1 && i.x == j.x - 1)
 				_nsx_draw_xpm(mlx_info, i, "textures/tiles/tile05.xpm");
 			else
-				_nsx_draw_image(mlx_info, i, mlx_info->Box.sprite);
+				_nsx_draw_xpm(mlx_info, i, "textures/box.xpm");
 		}
 }
 
 void	_nsx_miniapi(t_vect2 i, t_mlx *mlx_info, char c)
 {
 	if (ft_strchr("0ECP", c))
-		_nsx_draw_image(mlx_info, i, mlx_info->Floor.sprite);
+		_nsx_draw_xpm(mlx_info, i, "textures/tiles/tile04.xpm");
 	if (c == 'C')
-		_nsx_draw_image(mlx_info, i, mlx_info->Collection.sprite);
+		_nsx_draw_xpm(mlx_info, i, "textures/foods/food0.xpm");
 	if (c == 'P')
-		_nsx_draw_image(mlx_info, i, mlx_info->player.sprite);
+		_nsx_draw_xpm(mlx_info, i, "textures/player_down.xpm");
 	if (c == 'E')
-		_nsx_draw_image(mlx_info, i, mlx_info->door_close.sprite);
+		_nsx_draw_xpm(mlx_info, i, "textures/door_close.xpm");
 }
 
 void	_nsx_init_maps(t_mlx *mlx_info)
@@ -59,7 +59,7 @@ void	_nsx_init_maps(t_mlx *mlx_info)
 	t_vect2	j;
 
 	maps = mlx_info->maps;
-	_initialize_vect(&i, 0, 0);
+	_nsx_initialize_vect(&i, 0, 0);
 	j = mlx_info->window_size;
 	while (i.y < j.y)
 	{
@@ -83,8 +83,8 @@ void	_nsx_start_game(t_mlx	*mlx_info)
 	if (!mlx_info->mlx_ptr)
 		_nsx_exit("MLX Can't Create The Window", -1, 'E');
 	_nsx_init_maps(mlx_info);
-	mlx_hook(mlx_info->win_ptr, 17, 0, exitfunc, mlx_info);
-	mlx_hook(mlx_info->win_ptr, 2, 0, key_down, mlx_info);
-	mlx_loop_hook(mlx_info->mlx_ptr, loop, mlx_info);
+	mlx_hook(mlx_info->win_ptr, 17, 0, _nsx_exitfunc, mlx_info);
+	mlx_hook(mlx_info->win_ptr, 2, 0, _nsx_key_down, mlx_info);
+	mlx_loop_hook(mlx_info->mlx_ptr, _nsx_loop, mlx_info);
 	mlx_loop(mlx_info->mlx_ptr);
 }

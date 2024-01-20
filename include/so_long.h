@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:13:45 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/19 23:37:42 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/20 20:17:30 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,44 +59,34 @@ typedef struct s_nsx_Gobject
 
 typedef struct s_mlx
 {
-	unsigned long	P_steps_count;
-	t_nsx_Gobject	door_close;
-	t_nsx_Gobject	door_open;
-	t_nsx_Gobject	player;
-	t_nsx_Gobject	Collection;
-	t_nsx_Gobject	Score_Board;
-	t_nsx_Gobject	Floor;
-	t_nsx_Gobject	Enemy;
-	int				Enemies_count;
-	t_nsx_Gobject	Box;
-	t_vect2			doorpos;
 	void			*mlx_ptr;
 	void			*win_ptr;
 	char			**maps;
 	t_vect2			window_size;
-	// int				win_x;
-	// int				win_y;
-	int				door_locked;
-	int				Coll_Goal;
+	t_vect2			doorpos;
+	t_vect2			plrpos;
+	int				P_steps_count;
 	int				P_Coll_n;
+	int				Coll_Goal;
+	int				door_locked;
 }	t_mlx;
 
-void	_initialize_vect(t_vect2 *vect2, int x, int y);
-void	_move_to(t_mlx	*mlx_info, t_vect2 newpos, void *ptexture);
+void	_nsx_initialize_vect(t_vect2 *vect2, int x, int y);
+void	_nsx_move_to(t_mlx	*mlx_info, t_vect2 newpos, char	*texturepath);
 
-void	check_maps(t_mlx *mlx_info);
-void	_nsx_invalid_maps(char *cause);
+void	_nsx_check_maps(t_mlx *mlx_info);
+void	_nsx_invalid_maps(void);
 void	_nsx_invalid_xpmfile(char *fname);
 void	_nsx_exit(char *last_msg, int status, char type);
 void	_nsx_check_extension_args(int ac, char **av);
 
 void	_nsx_start_game(t_mlx *mlx_data);
-int		key_down(int keycode, t_mlx *mlx_info);
-int		exitfunc(t_mlx *mlx_info);
-int		loop(t_mlx *mlx_info);
+int		_nsx_key_down(int keycode, t_mlx *mlx_info);
+int		_nsx_exitfunc(t_mlx *mlx_info);
+int		_nsx_loop(t_mlx *mlx_info);
 void	_painter_api(t_mlx *mlx_info, t_vect2 step, t_vect2 pos);
 
-void	_nsx_new_gameobject(char *xpmfile, t_nsx_Gobject *gameobject, t_mlx *m_data);
+void	_nsx_new_Obj(char *xpmfile, t_nsx_Gobject *gameobject, t_mlx *m_data);
 
 void	_nsx_free_all(t_mlx *mlx_info);
 void	_nsx_free_2d(char	**arr2d);
@@ -115,5 +105,6 @@ void	_nsx_new_player(t_nsx_Gobject *gameobject, t_mlx *m_data);
 void	*_nsx_xpm(t_mlx *mlx_info, char *xpmfile);
 void	_nsx_player_moveup(t_mlx *mlx_info);
 
-int	_nsx_flood_fill(char **maps, int x, int y, t_ff_check *res);
+void	_nsx_flood_fill_help(t_mlx *mlx_info, char *mapsfile);
+char	**_nsx_read_maps(char *filename);
 #endif

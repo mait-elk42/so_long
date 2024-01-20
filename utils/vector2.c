@@ -6,13 +6,13 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 16:40:48 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/18 22:21:52 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/20 20:13:59 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	_initialize_vect(t_vect2 *vect2, int x, int y)
+void	_nsx_initialize_vect(t_vect2 *vect2, int x, int y)
 {
 	vect2->x = x;
 	vect2->y = y;
