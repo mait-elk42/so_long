@@ -11,9 +11,9 @@ static char *result[] = {
 "@ c white",
 /* pixels */
 "                ..XXXXXXXXXXXXXX",
-"                 .XXXXXXXXXXXXXo",
-"            O OOOooXooooXXXXXooo",
-"          OO   O  oXooooXXXXoooo",
+"                 .XXXXXXXXXXXXXX",
+"            O OOOooXooooXXXXXooX",
+"          OO   O  oXooooXXXXoooX",
 "   O            O .ooooXXXXXXXXX",
 "    OO           .ooXXXXXXXXXXXX",
 "               ...oXXXXXXXXXXXXX",
@@ -25,9 +25,9 @@ static char *result[] = {
 "                .ooXXoooXXXXXXXX",
 "            OO OOoooooooXXXXXXXX",
 "                O oXoXXXXXXoXXXX",
-"                 OooXXXXXXXXXXoo",
-"                 ..oXXXXXXXXXXoo",
-"   O            ..ooXXoooXXXXXoo",
+"                 OooXXXXXXXXXXoX",
+"                 ..oXXXXXXXXXXoX",
+"   O            ..ooXXoooXXXXXoX",
 "  OO         O  O oXXXoooXXXXXXX",
 "           O     OOoXXXXoXXXoXXX",
 "                    oXXXXXXXXXXX",
@@ -40,6 +40,6 @@ static char *result[] = {
 "   O           OO..XXXXXXXXXXXXX",
 "   O O          OooXXXXXXXXXXXXX",
 "   OOO      OO     oXXXXXXXXXXXX",
-"                  ooXXXXXXoooooo",
+"                  ooXXXXXXoooooX",
 "                ..oXXXXXXXXooooX"
 };
