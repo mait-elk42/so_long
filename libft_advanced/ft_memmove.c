@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/02 15:10:54 by mait-elk          #+#    #+#             */
-/*   Updated: 2023/11/13 20:50:41 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/20 13:41:17 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	size_t				i;
 	unsigned char		*_dst;
 	unsigned char		*_src;
 
@@ -22,7 +21,6 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 		return (0);
 	_dst = (unsigned char *)dst;
 	_src = (unsigned char *)src;
-	i = 0;
 	if (dst > src)
 	{
 		while (len--)

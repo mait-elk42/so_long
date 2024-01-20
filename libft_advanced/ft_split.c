@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/03 15:32:55 by mait-elk          #+#    #+#             */
-/*   Updated: 2023/11/13 14:25:59 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/20 13:41:07 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,9 @@
 
 static size_t	_nsx_wordc(const char *str, char btwn)
 {
-	size_t	i;
 	size_t	wc;
 
 	wc = 0;
-	i = 0;
 	if (*str && *str != btwn)
 		wc++;
 	while (*str)
