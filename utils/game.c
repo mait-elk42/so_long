@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:08:42 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/19 22:08:12 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/20 12:32:39 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,12 +77,12 @@ void	_nsx_init_maps(t_mlx *mlx_info)
 
 void	_nsx_start_game(t_mlx	*mlx_info)
 {
-	int	i;
-
-	i = 0;
+	mlx_info->win_ptr = mlx_new_window(mlx_info->mlx_ptr,
+		mlx_info->window_size.x * OBJ_SCALE,
+		mlx_info->window_size.y * OBJ_SCALE, "so_long<mait-elk>");
+	if (!mlx_info->mlx_ptr)
+		_nsx_exit("MLX Can't Create The Window", -1, 'E');
 	_nsx_init_maps(mlx_info);
-	//SIGSEV ERR : >> FIXED I THINK ITS ABOUT pos.y , before its pos.x
-	// _nsx_flood_fill(mlx_info, mlx_info->player.pos.x, mlx_info->player.pos.y);
 	mlx_hook(mlx_info->win_ptr, 17, 0, exitfunc, mlx_info);
 	mlx_hook(mlx_info->win_ptr, 2, 0, key_down, mlx_info);
 	mlx_loop_hook(mlx_info->mlx_ptr, loop, mlx_info);

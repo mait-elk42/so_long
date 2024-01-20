@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 22:18:59 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/19 23:42:23 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/20 12:31:35 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,8 @@ void	_nsx_flood_fill_help(t_mlx *mlx_info, char *mapsfile)
 	result.e = 0;
 	_nsx_flood_fill(cpmaps, mlx_info->player.pos.x, mlx_info->player.pos.y, &result);
 	_nsx_free_2d(cpmaps);
-	if (result.c == mlx_info->Coll_Goal && result.e)
-		ft_printf("valiiid\n");
-	else
-		_nsx_exit("INVALID PATH!!", -1, 'E');
+	if (result.c != mlx_info->Coll_Goal || !result.e)
+		_nsx_invalid_maps("INVALID PATH");
 }
 
 int	main(int ac, char **av)
@@ -96,10 +94,6 @@ int	main(int ac, char **av)
 	_nsx_init_vars(&mlx_info);
 	check_maps(&mlx_info);
 	_nsx_flood_fill_help(&mlx_info, av[1]);
-
-	mlx_info.win_ptr = mlx_new_window(mlx_info.mlx_ptr, mlx_info.window_size.x * OBJ_SCALE, mlx_info.window_size.y * OBJ_SCALE, "so_long<mait-elk>");
-	if (!mlx_info.mlx_ptr)
-		_nsx_exit("MLX Can't Create The Window", -1, 'E');
 	_nsx_start_game(&mlx_info);
 	return (0);
 }
