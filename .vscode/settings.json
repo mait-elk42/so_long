@@ -12,6 +12,7 @@
 		"logger.h": "c",
 		"signal.h": "c",
 		"ios": "c",
-		"fcntl.h": "c"
+		"fcntl.h": "c",
+		"so_long_bonus.h": "c"
 	}
 }
