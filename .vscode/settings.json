@@ -11,6 +11,7 @@
 		"ratio": "c",
 		"logger.h": "c",
 		"signal.h": "c",
-		"ios": "c"
+		"ios": "c",
+		"fcntl.h": "c"
 	}
 }

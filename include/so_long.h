@@ -6,14 +6,13 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:13:45 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/21 05:22:22 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/21 19:18:47 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 # include "libft.h"
-# include "keys.h"
 # include <fcntl.h>
 # include <mlx.h>
 
@@ -23,6 +22,16 @@
 # define P_DOWN "textures/player_down.xpm"
 # define P_LEFT "textures/player_left.xpm"
 # define P_RIGHT "textures/player_right.xpm"
+
+# define K_ESC 53
+# define K_W 13
+# define K_A 0
+# define K_S 1
+# define K_D 2
+# define K_ARROW_UP 126
+# define K_ARROW_LEFT 123
+# define K_ARROW_DOWN 125
+# define K_ARROW_RIGHT 124
 
 typedef enum e_nsx_dir
 {
@@ -82,10 +91,10 @@ void		_nsx_start_game(t_mlx *mlx_data);
 int			_nsx_key_down(int keycode, t_mlx *mlx_info);
 int			_nsx_exitfunc(t_mlx *mlx_info);
 int			_nsx_loop(t_mlx *mlx_info);
+int			_nsx_loop_coin(t_mlx *mlx_info);
 
 void		_nsx_new_obj(char *xpmfile, t_nsx_gobject *obj, t_mlx *m_data);
 
-void		_nsx_free_all(t_mlx *mlx_info);
 void		_nsx_free_2d(char	**arr2d);
 int			_nsx_p_open(char *filename);
 void		*_nsx_p_malloc(int size);

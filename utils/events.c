@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:15:59 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/21 07:00:21 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/21 19:53:15 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,12 @@ int	_nsx_loop(t_mlx *mlx_info)
 	static t_vect2			targ;
 	static int				n;
 
+	_nsx_loop_coin(mlx_info);
 	if (!bomb_dir && _nsx_vv_eqor(mlx_info->plrpos, mlx_info->doorpos))
 		bomb_dir = _nsx_enemy_mv_dir(&dir, &targ, mlx_info);
 	if (dir.x == mlx_info->plrpos.x && dir.y == mlx_info->plrpos.y)
 		_nsx_exit("YOU LOOSE!", 0, 0);
-	if (n < 1000)
+	if (n < 700)
 		return (n++, 0);
 	n = 0;
 	if (bomb_dir == None)
@@ -64,5 +65,37 @@ int	_nsx_loop(t_mlx *mlx_info)
 		_nsx_enemy_init_dir(&dir, bomb_dir);
 		_nsx_draw_xpm(mlx_info, dir, "textures/bomb.xpm");
 	}
+	return (0);
+}
+
+int	_nsx_loop_coin(t_mlx *mlx_info)
+{
+	static int	i;
+	static int	j;
+	t_vect2		pos;
+
+	_nsx_initialize_vect(&pos, 0, 0);
+	if (i < 700)
+		return (i++, 0);
+	while (mlx_info->maps[pos.y])
+	{
+		pos.x = 0;
+		while (mlx_info->maps[pos.y][pos.x])
+		{
+			char *path = ft_strdup("textures/keys/coin0.xpm");
+			path[18] = j + 48;
+			if (mlx_info->maps[pos.y][pos.x] == 'C')
+			{
+				_nsx_draw_xpm(mlx_info, pos, "textures/tiles/tile04.xpm");
+				_nsx_draw_xpm(mlx_info, pos, path);
+			}
+			pos.x++;
+		}
+		pos.y++;
+	}
+	i = 0;
+	if (j == 7)
+		j = 0;
+	j++;
 	return (0);
 }
