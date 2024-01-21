@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:15:59 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/21 19:53:15 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/21 20:53:16 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	_nsx_loop(t_mlx *mlx_info)
 		bomb_dir = _nsx_enemy_mv_dir(&dir, &targ, mlx_info);
 	if (dir.x == mlx_info->plrpos.x && dir.y == mlx_info->plrpos.y)
 		_nsx_exit("YOU LOOSE!", 0, 0);
-	if (n < 700)
+	if (n < 1000)
 		return (n++, 0);
 	n = 0;
 	if (bomb_dir == None)
@@ -71,31 +71,26 @@ int	_nsx_loop(t_mlx *mlx_info)
 int	_nsx_loop_coin(t_mlx *mlx_info)
 {
 	static int	i;
-	static int	j;
+	static int	f;
 	t_vect2		pos;
 
 	_nsx_initialize_vect(&pos, 0, 0);
-	if (i < 700)
+	if (i < 1000)
 		return (i++, 0);
 	while (mlx_info->maps[pos.y])
 	{
 		pos.x = 0;
 		while (mlx_info->maps[pos.y][pos.x])
 		{
-			char *path = ft_strdup("textures/keys/coin0.xpm");
-			path[18] = j + 48;
 			if (mlx_info->maps[pos.y][pos.x] == 'C')
-			{
-				_nsx_draw_xpm(mlx_info, pos, "textures/tiles/tile04.xpm");
-				_nsx_draw_xpm(mlx_info, pos, path);
-			}
+				_nsx_putcoin_nextframe(mlx_info, pos, f);
 			pos.x++;
 		}
 		pos.y++;
 	}
+	f++;
+	if (f == 8)
+		f = 0;
 	i = 0;
-	if (j == 7)
-		j = 0;
-	j++;
 	return (0);
 }

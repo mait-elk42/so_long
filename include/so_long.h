@@ -6,13 +6,13 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:13:45 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/21 19:18:47 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/21 20:55:02 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-# include "libft.h"
+# include "../libft_advanced/libft.h"
 # include <fcntl.h>
 # include <mlx.h>
 
@@ -109,6 +109,7 @@ void		_nsx_flood_fill_help(t_mlx *mlx_info, char *mapsfile);
 char		**_nsx_read_maps(char *filename);
 
 void		_nsx_auto_render(t_mlx *mlx_info, t_vect2 pos);
+void		_nsx_putcoin_nextframe(t_mlx *mlx_info, t_vect2 pos, int f);
 
 void		_nsx_enemy_init_dir(t_vect2 *dir, t_nsx_dir bomb_dir);
 t_nsx_dir	_nsx_enemy_mv_dir(t_vect2 *dir, t_vect2 *targ, t_mlx *m);
