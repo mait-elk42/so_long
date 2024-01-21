@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:15:59 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/21 05:24:18 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/21 07:00:21 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	_nsx_loop(t_mlx *mlx_info)
 		bomb_dir = _nsx_enemy_mv_dir(&dir, &targ, mlx_info);
 	if (dir.x == mlx_info->plrpos.x && dir.y == mlx_info->plrpos.y)
 		_nsx_exit("YOU LOOSE!", 0, 0);
-	if (n < 700)
+	if (n < 1000)
 		return (n++, 0);
 	n = 0;
 	if (bomb_dir == None)

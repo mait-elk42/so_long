@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/16 16:40:22 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/21 06:07:30 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/21 06:51:53 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void	_nsx_show_score(t_mlx *mlx_info)
 	char		*s;
 
 	_nsx_initialize_vect(&pos, 0, 0);
-	pos.x = (mlx_info->window_size.x / 2);
 	s = ft_itoa(mlx_info->p_steps_count);
 	_nsx_draw_xpm(mlx_info, pos, "textures/tiles/sboard.xpm");
 	mlx_string_put(mlx_info->mlx_ptr,
