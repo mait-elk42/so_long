@@ -6,11 +6,11 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:54:57 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/21 02:17:37 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/21 04:26:28 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "so_long.h"
 
 int	_nsx_flood_fill(char **maps, int x, int y, t_ff_check *res)
 {

@@ -6,11 +6,11 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:15:59 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/21 03:28:14 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/21 05:24:18 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "so_long.h"
 
 int	_nsx_key_down(int keycode, t_mlx *mlx_info)
 {
@@ -50,11 +50,11 @@ int	_nsx_loop(t_mlx *mlx_info)
 	if (!bomb_dir && _nsx_vv_eqor(mlx_info->plrpos, mlx_info->doorpos))
 		bomb_dir = _nsx_enemy_mv_dir(&dir, &targ, mlx_info);
 	if (dir.x == mlx_info->plrpos.x && dir.y == mlx_info->plrpos.y)
-		_nsx_exit("YOU LOOSE HH!", 0, 0);
+		_nsx_exit("YOU LOOSE!", 0, 0);
 	if (n < 700)
 		return (n++, 0);
 	n = 0;
-	if (!bomb_dir)
+	if (bomb_dir == None)
 		return (0);
 	if (dir.x == targ.x && dir.y == targ.y)
 		(_nsx_auto_render(mlx_info, dir), bomb_dir = 0);

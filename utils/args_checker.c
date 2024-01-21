@@ -6,11 +6,11 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/11 18:08:09 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/20 19:54:24 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/21 04:25:24 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "so_long.h"
 
 void	_nsx_check_extension_args(int ac, char **av)
 {

@@ -6,11 +6,11 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 02:41:56 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/21 02:42:48 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/21 04:26:53 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "so_long.h"
 
 void	_nsx_new_obj(char *xpmfile, t_nsx_gobject *obj, t_mlx *m_data)
 {

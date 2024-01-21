@@ -6,11 +6,11 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:08:42 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/21 02:55:54 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/21 05:23:46 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "so_long.h"
 
 void	_nsx_mini_api(t_mlx *mlx_info, t_vect2 i, t_vect2 j)
 {
@@ -65,7 +65,7 @@ void	_nsx_start_game(t_mlx	*mlx_info)
 {
 	mlx_info->win_ptr = mlx_new_window(mlx_info->mlx_ptr,
 			mlx_info->window_size.x * OBJ_SCALE,
-			mlx_info->window_size.y * OBJ_SCALE, "so_long<mait-elk>");
+			mlx_info->window_size.y * OBJ_SCALE, "so_long <mait-elk>");
 	if (!mlx_info->mlx_ptr)
 		_nsx_exit("MLX Can't Create The Window", -1, 'E');
 	_nsx_init_maps(mlx_info);

@@ -6,11 +6,11 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 19:22:31 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/21 03:28:58 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/21 06:05:33 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "so_long.h"
 
 void	_nsx_move_to(t_mlx	*mlx_info, t_vect2 newpos, char	*texturepath)
 {

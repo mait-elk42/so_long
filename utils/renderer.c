@@ -6,11 +6,11 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 00:18:13 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/21 02:39:24 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/21 05:03:25 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "so_long.h"
 
 void	_nsx_auto_render(t_mlx *mlx_info, t_vect2 pos)
 {

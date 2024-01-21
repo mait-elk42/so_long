@@ -6,11 +6,11 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/14 15:17:05 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/21 02:39:48 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/21 04:27:05 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "so_long.h"
 
 void	*_nsx_p_malloc(int size)
 {

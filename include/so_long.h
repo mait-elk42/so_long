@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:13:45 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/21 02:51:32 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/21 05:22:22 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,6 @@ int			_nsx_p_open(char *filename);
 void		*_nsx_p_malloc(int size);
 
 void		_nsx_game_closed(t_mlx *mlx_info);
-void		_nsx_draw_image(t_mlx *mlx_info, t_vect2 pos, void *texture);
 void		_nsx_show_score(t_mlx *mlx_info);
 
 void		_nsx_draw_xpm(t_mlx *mlx_info, t_vect2 pos, char *xpmfile);

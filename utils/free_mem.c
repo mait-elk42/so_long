@@ -6,11 +6,11 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 15:52:15 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/21 02:56:19 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/21 04:26:33 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "so_long.h"
 
 void	_nsx_free_2d(char	**arr2d)
 {

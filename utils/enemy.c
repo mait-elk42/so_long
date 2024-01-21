@@ -6,11 +6,11 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 01:15:32 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/21 02:06:52 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/21 05:22:11 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "so_long.h"
 
 void	_nsx_enemy_init_dir(t_vect2 *dir, t_nsx_dir bomb_dir)
 {

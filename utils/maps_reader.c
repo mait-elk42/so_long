@@ -6,11 +6,11 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/20 20:09:10 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/21 02:42:59 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/21 04:26:48 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/so_long.h"
+#include "so_long.h"
 
 int	_nsx_get_filelines(char *filename)
 {
