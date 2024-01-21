@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/10 12:45:34 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/20 20:15:49 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/21 01:16:17 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	_nsx_mini_api_checker(t_vect2 i, t_mlx *mlx_info, int is_last)
 	if (!ft_strchr("01PEC", mlx_info->maps[i.y][i.x]))
 		_nsx_invalid_maps();
 	if (mlx_info->maps[i.y][i.x] == 'C')
-		mlx_info->Coll_Goal++;
+		mlx_info->coll_goal++;
 	if (mlx_info->maps[i.y][i.x] == 'P')
 	{
 		if (players >= 1)
@@ -55,7 +55,7 @@ void	_nsx_mini_api_checker(t_vect2 i, t_mlx *mlx_info, int is_last)
 		exits++;
 		_nsx_initialize_vect(&mlx_info->doorpos, i.x, i.y);
 	}
-	if (is_last && (exits == 0 || players == 0 || mlx_info->Coll_Goal == 0))
+	if (is_last && (exits == 0 || players == 0 || mlx_info->coll_goal == 0))
 		_nsx_invalid_maps();
 }
 

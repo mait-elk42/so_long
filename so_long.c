@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 22:18:59 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/20 20:19:36 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/21 01:15:55 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	_nsx_init_vars(t_mlx *mlx_info)
 {
-	mlx_info->P_Coll_n = 0;
-	mlx_info->Coll_Goal = 0;
+	mlx_info->p_coll_n = 0;
+	mlx_info->coll_goal = 0;
 	mlx_info->door_locked = 1;
-	mlx_info->P_steps_count = 0;
+	mlx_info->p_steps_count = 0;
 	_nsx_initialize_vect(&mlx_info->window_size, 0, 0);
 }
 

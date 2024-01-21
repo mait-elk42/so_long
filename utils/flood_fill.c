@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 22:54:57 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/20 20:10:38 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/21 02:17:37 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 int	_nsx_flood_fill(char **maps, int x, int y, t_ff_check *res)
 {
-	if (x < 0 || y < 0 || maps[y][x] == '1' ||
-		maps[y][x] == 'F')
+	if (maps[y][x] == '1' || maps[y][x] == 'F')
 		return (0);
 	if (maps[y][x] == 'E')
 	{
@@ -43,6 +42,6 @@ void	_nsx_flood_fill_help(t_mlx *mlx_info, char *mapsfile)
 	_nsx_flood_fill(cpmaps, mlx_info->plrpos.x,
 		mlx_info->plrpos.y, &result);
 	_nsx_free_2d(cpmaps);
-	if (result.c != mlx_info->Coll_Goal || !result.e)
+	if (result.c != mlx_info->coll_goal || !result.e)
 		_nsx_invalid_maps();
 }
