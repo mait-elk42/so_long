@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:08:42 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/21 19:28:34 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/22 00:22:12 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ void	_nsx_init_maps(t_mlx *mlx_info)
 		}
 		i.y++;
 	}
-	_nsx_show_score(mlx_info);
 }
 
 void	_nsx_start_game(t_mlx	*mlx_info)
@@ -71,6 +70,5 @@ void	_nsx_start_game(t_mlx	*mlx_info)
 	_nsx_init_maps(mlx_info);
 	mlx_hook(mlx_info->win_ptr, 17, 0, _nsx_exitfunc, mlx_info);
 	mlx_hook(mlx_info->win_ptr, 2, 0, _nsx_key_down, mlx_info);
-	mlx_loop_hook(mlx_info->mlx_ptr, _nsx_loop, mlx_info);
 	mlx_loop(mlx_info->mlx_ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:13:45 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/21 23:10:36 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/22 00:39:59 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,6 @@ typedef struct s_vect2
 
 }	t_vect2;
 
-typedef struct s_nsx_gobject
-{
-	void				*sprite;
-	int					sp_xsize;
-	int					sp_ysize;
-	t_vect2				pos;
-}	t_nsx_gobject;
-
 typedef struct s_mlx
 {
 	void			*mlx_ptr;
@@ -92,8 +84,6 @@ int			_nsx_key_down(int keycode, t_mlx *mlx_info);
 int			_nsx_exitfunc(t_mlx *mlx_info);
 int			_nsx_loop(t_mlx *mlx_info);
 int			_nsx_loop_coin(t_mlx *mlx_info);
-
-void		_nsx_new_obj(char *xpmfile, t_nsx_gobject *obj, t_mlx *m_data);
 
 void		_nsx_free_2d(char	**arr2d);
 int			_nsx_p_open(char *filename);

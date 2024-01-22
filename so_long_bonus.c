@@ -6,11 +6,11 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 22:18:59 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/21 23:09:00 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/22 01:10:49 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "include/so_long_bonus.h"
+#include "so_long_bonus.h"
 
 void	_nsx_init_vars(t_mlx *mlx_info)
 {

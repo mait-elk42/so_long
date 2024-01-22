@@ -6,18 +6,18 @@
 #    By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 18:06:00 by mait-elk          #+#    #+#              #
-#    Updated: 2024/01/21 23:29:10 by mait-elk         ###   ########.fr        #
+#    Updated: 2024/01/22 01:30:41 by mait-elk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CFLAGS= -Wall -Wextra -Werror
 UTILS= utils/map_check.c utils/logger.c utils/vector2.c utils/args_checker.c \
-	utils/game.c utils/events.c utils/object.c utils/free_mem.c utils/protect.c \
+	utils/game.c utils/events.c utils/free_mem.c utils/protect.c \
 	utils/easy_mlx.c utils/player_mover.c utils/flood_fill.c utils/maps_reader.c \
-	utils/renderer.c utils/enemy.c
+	utils/renderer.c
 
 B_UTILS= utils_bonus/map_check_bonus.c utils_bonus/logger_bonus.c utils_bonus/vector2_bonus.c utils_bonus/args_checker_bonus.c \
-	utils_bonus/game_bonus.c utils_bonus/events_bonus.c utils_bonus/object_bonus.c utils_bonus/free_mem_bonus.c utils_bonus/protect_bonus.c \
+	utils_bonus/game_bonus.c utils_bonus/events_bonus.c utils_bonus/free_mem_bonus.c utils_bonus/protect_bonus.c \
 	utils_bonus/easy_mlx_bonus.c utils_bonus/player_mover_bonus.c utils_bonus/flood_fill_bonus.c utils_bonus/maps_reader_bonus.c \
 	utils_bonus/renderer_bonus.c utils_bonus/enemy_bonus.c
 
