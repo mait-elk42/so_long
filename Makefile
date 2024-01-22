@@ -6,7 +6,7 @@
 #    By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/01/05 18:06:00 by mait-elk          #+#    #+#              #
-#    Updated: 2024/01/22 01:30:41 by mait-elk         ###   ########.fr        #
+#    Updated: 2024/01/22 14:43:27 by mait-elk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,10 +31,10 @@ NAME= so_long
 BONUS= so_long_bonus
 
 all:  $(NAME)
-	@echo "SO_LONG IS READY"
+	@echo "SO_LONG IS READY TO PLAY"
 
 bonus: $(BONUS)
-	@echo "SO_LONG_BONUS IS READY"
+	@echo "SO_LONG_BONUS IS READY TO PLAY"
 
 $(NAME): $(LIBFT) $(UTILS_O) so_long.o
 	$(CC) $(CFLAGS) so_long.o $(UTILS_O) $(LIBFT) -I $(INC) -o $(NAME) -lmlx -framework OpenGL -framework AppKit
