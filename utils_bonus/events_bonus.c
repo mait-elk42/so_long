@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/12 12:15:59 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/22 00:54:20 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/22 05:48:23 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	_nsx_loop(t_mlx *mlx_info)
 	{
 		_nsx_auto_render(mlx_info, dir);
 		_nsx_enemy_init_dir(&dir, bomb_dir);
-		_nsx_draw_xpm(mlx_info, dir, "textures/bomb.xpm");
+		_nsx_draw_enemy(mlx_info, dir, bomb_dir);
 	}
 	return (0);
 }

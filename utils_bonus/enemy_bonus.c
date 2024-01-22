@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/21 01:15:32 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/21 21:19:32 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/22 06:21:32 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,16 @@ t_nsx_dir	_nsx_enemy_mv_dir(t_vect2 *dir, t_vect2 *targ, t_mlx *m)
 		return (UP);
 	}
 	return (None);
+}
+
+void	_nsx_draw_enemy(t_mlx *mlx_info, t_vect2 dir, t_nsx_dir bomb_dir)
+{
+	if (bomb_dir == DOWN)
+		_nsx_draw_xpm(mlx_info, dir, "textures/enemy/down.xpm");
+	if (bomb_dir == RIGHT)
+		_nsx_draw_xpm(mlx_info, dir, "textures/enemy/right.xpm");
+	if (bomb_dir == UP)
+		_nsx_draw_xpm(mlx_info, dir, "textures/enemy/up.xpm");
+	if (bomb_dir == LEFT)
+		_nsx_draw_xpm(mlx_info, dir, "textures/enemy/left.xpm");
 }

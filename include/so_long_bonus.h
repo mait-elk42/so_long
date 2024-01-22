@@ -6,7 +6,7 @@
 /*   By: mait-elk <mait-elk@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/05 16:13:45 by mait-elk          #+#    #+#             */
-/*   Updated: 2024/01/22 00:39:59 by mait-elk         ###   ########.fr       */
+/*   Updated: 2024/01/22 05:47:48 by mait-elk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,6 @@ void		_nsx_putcoin_nextframe(t_mlx *mlx_info, t_vect2 pos, int f);
 
 void		_nsx_enemy_init_dir(t_vect2 *dir, t_nsx_dir bomb_dir);
 t_nsx_dir	_nsx_enemy_mv_dir(t_vect2 *dir, t_vect2 *targ, t_mlx *m);
+void		_nsx_draw_enemy(t_mlx *mlx_info, t_vect2 dir, t_nsx_dir bomb_dir);
 
 #endif
